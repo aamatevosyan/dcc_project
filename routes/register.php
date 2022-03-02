@@ -13,7 +13,8 @@ Route::controller(EmailCodeController::class)
         Route::post('/', 'store')
             ->name('store');
 
-        Route::post('/resend', 'resend')
+        Route::post('/resend/{uuid}', 'resend')
+            ->whereUuid('uuid')
             ->name('resend');
 
         Route::prefix('/validate')

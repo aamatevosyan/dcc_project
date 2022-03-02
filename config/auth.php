@@ -108,4 +108,13 @@ return [
 
     'password_timeout' => 10800,
 
+    /*
+     * Other
+     */
+
+    'sms_code_timeout' => 300,
+
+    'sms_cool_down_after_seconds' => 60,
+
+    'email_code_timeout' => 300,
 ];
