@@ -7,24 +7,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\{InteractsWithQueue, SerializesModels};
-use Illuminate\Support\Facades\{Cache, Mail};
+use Illuminate\Support\Facades\Cache;
 
-class SendCodeByEmail implements ShouldQueue
+class SendCodeByPhone implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public string $email;
+    public string $phone;
     public string $uuid;
 
     /**
      * Create a new job instance.
      *
-     * @param  string  $email
+     * @param  string  $phone
      * @param  string  $uuid
      */
-    public function __construct(string $email, string $uuid)
+    public function __construct(string $phone, string $uuid)
     {
-        $this->email = $email;
+        $this->phone = $phone;
         $this->uuid = $uuid;
     }
 
@@ -37,14 +37,13 @@ class SendCodeByEmail implements ShouldQueue
     public function handle(): void
     {
         $code = (string) random_int(10000, 99999);
-        $cacheKey = "auth.sendcode.email.$this->uuid}";
+        $cacheKey = "auth.sendcode.phone.$this->uuid}";
 
-        Mail::send('auth.email-confirm', compact('code'),
-            fn($m) => $m->to($this->email)->subject('Email Code Validation'));
+        //TODO: add Twilio send
 
         $data = Cache::get($cacheKey);
         $data['code'] = $code;
 
-        Cache::put($cacheKey, $data, now()->addDay());
+        Cache::put($cacheKey, $data, now()->addSeconds(config('auth.sms_cool_down_after_seconds')));
     }
 }

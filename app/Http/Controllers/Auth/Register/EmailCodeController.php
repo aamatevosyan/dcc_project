@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Register\ResendEmailCodeRequest;
 use App\Http\Requests\Auth\Register\SendEmailCodeRequest;
 use App\Http\Requests\Auth\Register\ValidateEmailCodeRequest;
-use App\Jobs\SendCodeByEmail;
+use App\Jobs\SendCodeByPhone;
 use App\Models\User;
 use Cache;
 use Illuminate\Http\RedirectResponse;
@@ -24,7 +24,7 @@ class EmailCodeController extends Controller
      */
     public function index(Request $request): InertiaResponse
     {
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Auth/Email/Send');
     }
 
     /**
@@ -55,7 +55,7 @@ class EmailCodeController extends Controller
             now()->addDay()
         );
 
-        SendCodeByEmail::dispatch($request->email, $uuid);
+        SendCodeByPhone::dispatch($request->email, $uuid);
 
         return redirect()->route('auth.register.email.validate.show', compact('uuid'));
     }
@@ -76,7 +76,7 @@ class EmailCodeController extends Controller
         $expires = max($dataFromCache['ttl'] - now()->timestamp, 0);
         $email = $dataFromCache['email'];
 
-        return Inertia::render('Auth/VerifyCode', compact('uuid', 'expires', 'email'));
+        return Inertia::render('Auth/Email/Verify', compact('uuid', 'expires', 'email'));
     }
 
     /**
@@ -139,7 +139,7 @@ class EmailCodeController extends Controller
             now()->addDay()
         );
 
-        SendCodeByEmail::dispatch($email, $uuid);
+        SendCodeByPhone::dispatch($email, $uuid);
 
         return redirect()->route('auth.register.email.validate.show', compact('uuid'));
     }

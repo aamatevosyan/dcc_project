@@ -35,9 +35,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'uuid',
         'email',
+        'phone',
         'password',
+        'status',
     ];
 
     /**
@@ -52,14 +56,14 @@ class User extends Authenticatable
         'two_factor_secret',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+//    /**
+//     * The attributes that should be cast.
+//     *
+//     * @var array<string, string>
+//     */
+//    protected $casts = [
+//        'email_verified_at' => 'datetime',
+//    ];
 
     /**
      * The accessors to append to the model's array form.
@@ -81,5 +85,10 @@ class User extends Authenticatable
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('status', self::STATUS_ACTIVE);
+    }
+
+    public function getNameAttribute(): string
+    {
+        return $this->first_name.' '.$this->last_name;
     }
 }
