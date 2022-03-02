@@ -26,7 +26,7 @@ services:
             - pgsql
             - redis
     pgsql:
-        image: 'postgres:13'
+        image: 'postgres:latest'
         container_name: dcc_project_pgsql
         ports:
             - '${FORWARD_DB_PORT:-5432}:5432'
