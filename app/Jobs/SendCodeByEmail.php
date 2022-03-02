@@ -37,7 +37,7 @@ class SendCodeByEmail implements ShouldQueue
   public function handle(): void
   {
     $code = (string)random_int(10000, 99999);
-    $cacheKey = "auth.sendcode.{$this->uuid}";
+    $cacheKey = "auth.sendcode.email.$this->uuid}";
 
     Mail::send('auth.email-confirm', compact('code'),
       fn($m) => $m->to($this->email)->subject('Email Code Validation'));

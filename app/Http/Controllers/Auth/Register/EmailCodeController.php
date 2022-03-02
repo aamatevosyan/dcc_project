@@ -46,7 +46,7 @@ class EmailCodeController extends Controller
         $uuid = Str::uuid()->toString();
 
         Cache::put(
-            "auth.sendcode.{$uuid}",
+            "auth.sendcode.email.{$uuid}",
             [
                 'email' => $request->email,
                 'ttl' => now()->addSeconds(config('auth.email_code_timeout'))->timestamp,
@@ -68,7 +68,7 @@ class EmailCodeController extends Controller
      */
     public function show(Request $request, string $uuid): RedirectResponse|InertiaResponse
     {
-        $cacheKey = "auth.sendcode.{$uuid}";
+        $cacheKey = "auth.sendcode.email.{$uuid}";
         if (!$dataFromCache = Cache::get($cacheKey)) {
             return redirect()->route('auth.register.email.create');
         }
@@ -87,7 +87,7 @@ class EmailCodeController extends Controller
      */
     public function destroy(ValidateEmailCodeRequest $request, string $uuid): RedirectResponse
     {
-        $cacheKey = "auth.sendcode.{$uuid}";
+        $cacheKey = "auth.sendcode.email.{$uuid}";
         $dataFromCache = Cache::get($cacheKey);
 
         if (!$dataFromCache
@@ -119,7 +119,7 @@ class EmailCodeController extends Controller
     {
         $uuid = $request->uuid;
         $email = $request->email;
-        $cacheKey = "auth.sendcode.{$uuid}";
+        $cacheKey = "auth.sendcode.email.{$uuid}";
         $dataFromCache = Cache::get($cacheKey);
 
         if (!$dataFromCache
@@ -130,7 +130,7 @@ class EmailCodeController extends Controller
         }
 
         Cache::put(
-            "auth.sendcode.{$uuid}",
+            "auth.sendcode.email.{$uuid}",
             [
                 'email' => $email,
                 'ttl' => now()->addSeconds(config('auth.email_code_timeout'))->timestamp,
