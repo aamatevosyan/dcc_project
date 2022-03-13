@@ -19,10 +19,12 @@ use Str;
 class EmailCodeController extends Controller
 {
     /**
-     * @param  Request  $request
+     * Show the register view.
+     *
+     * @param Request  $request
      * @return InertiaResponse
      */
-    public function index(Request $request): InertiaResponse
+    public function create(Request $request): InertiaResponse
     {
         return Inertia::render('Auth/Email/Send');
     }

@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.2.0.
+ * Generated for Laravel 9.4.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -4495,23 +4495,23 @@
      * @method static \Illuminate\Support\Carbon createFromTimestampMs($timestamp, $tz = null)
      * @method static \Illuminate\Support\Carbon createFromTimestampUTC($timestamp)
      * @method static \Illuminate\Support\Carbon createMidnightDate($year = null, $month = null, $day = null, $tz = null)
-     * @method static \Illuminate\Support\Carbon disableHumanDiffOption($humanDiffOption)
-     * @method static \Illuminate\Support\Carbon enableHumanDiffOption($humanDiffOption)
+     * @method static void disableHumanDiffOption($humanDiffOption)
+     * @method static void enableHumanDiffOption($humanDiffOption)
      * @method static \Illuminate\Support\Carbon fromSerialized($value)
-     * @method static \Illuminate\Support\Carbon getLastErrors()
-     * @method static \Illuminate\Support\Carbon getTestNow()
+     * @method static array getLastErrors()
+     * @method static \Illuminate\Support\Carbon|null getTestNow()
      * @method static \Illuminate\Support\Carbon instance($date)
-     * @method static \Illuminate\Support\Carbon isMutable()
+     * @method static bool isMutable()
      * @method static \Illuminate\Support\Carbon maxValue()
      * @method static \Illuminate\Support\Carbon minValue()
      * @method static \Illuminate\Support\Carbon now($tz = null)
      * @method static \Illuminate\Support\Carbon parse($time = null, $tz = null)
-     * @method static \Illuminate\Support\Carbon setHumanDiffOptions($humanDiffOptions)
+     * @method static void setHumanDiffOptions($humanDiffOptions)
      * @method static void setTestNow($testNow = null)
-     * @method static \Illuminate\Support\Carbon setUtf8($utf8)
+     * @method static void setUtf8($utf8)
      * @method static \Illuminate\Support\Carbon today($tz = null)
      * @method static \Illuminate\Support\Carbon tomorrow($tz = null)
-     * @method static \Illuminate\Support\Carbon useStrictMode($strictModeEnabled = true)
+     * @method static void useStrictMode($strictModeEnabled = true)
      * @method static \Illuminate\Support\Carbon yesterday($tz = null)
      * @method static \Illuminate\Support\Carbon|false createFromFormat($format, $time, $tz = null)
      * @method static \Illuminate\Support\Carbon|false createSafe($year = null, $month = null, $day = null, $hour = null, $minute = null, $second = null, $tz = null)
@@ -4760,6 +4760,18 @@
                         $instance->extend($name, $resolver);
         }
                     /**
+         * Remove an extension connection resolver.
+         *
+         * @param string $name
+         * @return void 
+         * @static 
+         */ 
+        public static function forgetExtension($name)
+        {
+                        /** @var \Illuminate\Database\DatabaseManager $instance */
+                        $instance->forgetExtension($name);
+        }
+                    /**
          * Return all of the created connections.
          *
          * @return array 
@@ -4793,19 +4805,6 @@
         {
                         /** @var \Illuminate\Database\DatabaseManager $instance */
                         return $instance->setApplication($app);
-        }
-                    /**
-         * Bind values to their parameters in the given statement.
-         *
-         * @param \PDOStatement $statement
-         * @param array $bindings
-         * @return void 
-         * @static 
-         */ 
-        public static function bindValues($statement, $bindings)
-        {
-                        /** @var \Illuminate\Database\PostgresConnection $instance */
-                        $instance->bindValues($statement, $bindings);
         }
                     /**
          * Get a schema builder instance for the connection.
@@ -5031,6 +5030,19 @@
         {            //Method inherited from \Illuminate\Database\Connection         
                         /** @var \Illuminate\Database\PostgresConnection $instance */
                         return $instance->pretend($callback);
+        }
+                    /**
+         * Bind values to their parameters in the given statement.
+         *
+         * @param \PDOStatement $statement
+         * @param array $bindings
+         * @return void 
+         * @static 
+         */ 
+        public static function bindValues($statement, $bindings)
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\PostgresConnection $instance */
+                        $instance->bindValues($statement, $bindings);
         }
                     /**
          * Prepare the query bindings for execution.
@@ -8528,6 +8540,19 @@
                         $instance->assertNothingSent();
         }
                     /**
+         * Assert that no notifications were sent to the given notifiable.
+         *
+         * @param mixed $notifiable
+         * @return void 
+         * @throws \Exception
+         * @static 
+         */ 
+        public static function assertNothingSentTo($notifiable)
+        {
+                        /** @var \Illuminate\Support\Testing\Fakes\NotificationFake $instance */
+                        $instance->assertNothingSentTo($notifiable);
+        }
+                    /**
          * Assert the total amount of times a notification was sent.
          *
          * @param string $notification
@@ -8984,7 +9009,7 @@
                     /**
          * Push a new job onto the queue.
          *
-         * @param string $job
+         * @param string|object $job
          * @param mixed $data
          * @param string|null $queue
          * @return mixed 
@@ -9013,7 +9038,7 @@
          * Push a new job onto the queue after (n) seconds.
          *
          * @param \DateTimeInterface|\DateInterval|int $delay
-         * @param string $job
+         * @param string|object $job
          * @param mixed $data
          * @param string|null $queue
          * @return mixed 
@@ -9028,7 +9053,7 @@
          * Push a new job onto the queue.
          *
          * @param string $queue
-         * @param string $job
+         * @param string|object $job
          * @param mixed $data
          * @return mixed 
          * @static 
@@ -9043,7 +9068,7 @@
          *
          * @param string $queue
          * @param \DateTimeInterface|\DateInterval|int $delay
-         * @param string $job
+         * @param string|object $job
          * @param mixed $data
          * @return mixed 
          * @static 
@@ -17363,6 +17388,84 @@
      
 }
 
+    namespace KgBot\LaravelLocalization\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class ExportLocalizations {
+                    /**
+         * Method to return generate array with contents of parsed language files.
+         *
+         * @return object 
+         * @static 
+         */ 
+        public static function export()
+        {
+                        /** @var \KgBot\LaravelLocalization\Classes\ExportLocalizations $instance */
+                        return $instance->export();
+        }
+                    /**
+         * Method to return array for json serialization.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function jsonSerialize()
+        {
+                        /** @var \KgBot\LaravelLocalization\Classes\ExportLocalizations $instance */
+                        return $instance->jsonSerialize();
+        }
+                    /**
+         * Method to return array.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function toArray()
+        {
+                        /** @var \KgBot\LaravelLocalization\Classes\ExportLocalizations $instance */
+                        return $instance->toArray();
+        }
+                    /**
+         * If you need special format of array that's recognised by some npm localization packages as Lang.js
+         * https://github.com/rmariuzzo/Lang.js use this method.
+         *
+         * @param array $array
+         * @param string $prefix
+         * @return array 
+         * @static 
+         */ 
+        public static function toFlat($prefix = '.')
+        {
+                        /** @var \KgBot\LaravelLocalization\Classes\ExportLocalizations $instance */
+                        return $instance->toFlat($prefix);
+        }
+                    /**
+         * Method to return array as collection.
+         *
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */ 
+        public static function toCollection()
+        {
+                        /** @var \KgBot\LaravelLocalization\Classes\ExportLocalizations $instance */
+                        return $instance->toCollection();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function exportToArray()
+        {
+                        return \KgBot\LaravelLocalization\Classes\ExportLocalizations::exportToArray();
+        }
+         
+    }
+     
+}
+
     namespace Silber\Bouncer { 
             /**
      * 
@@ -18113,10 +18216,10 @@
          *
          * @static 
          */ 
-        public static function report($throwable, $callback = null)
+        public static function report($throwable, $callback = null, $report = null)
         {
                         /** @var \Spatie\FlareClient\Flare $instance */
-                        return $instance->report($throwable, $callback);
+                        return $instance->report($throwable, $callback, $report);
         }
                     /**
          * 
@@ -18603,6 +18706,37 @@ namespace  {
             }
              
                 /**
+             * Add a basic "where not" clause to the query.
+             *
+             * @param \Closure|string|array|\Illuminate\Database\Query\Expression $column
+             * @param mixed $operator
+             * @param mixed $value
+             * @param string $boolean
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function whereNot($column, $operator = null, $value = null, $boolean = 'and')
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->whereNot($column, $operator, $value, $boolean);
+            }
+             
+                /**
+             * Add an "or where not" clause to the query.
+             *
+             * @param \Closure|array|string|\Illuminate\Database\Query\Expression $column
+             * @param mixed $operator
+             * @param mixed $value
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function orWhereNot($column, $operator = null, $value = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->orWhereNot($column, $operator, $value);
+            }
+             
+                /**
              * Add an "order by" clause for a timestamp to the query.
              *
              * @param string|\Illuminate\Database\Query\Expression $column
@@ -18808,6 +18942,21 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->value($column);
+            }
+             
+                /**
+             * Get a single column's value from the first result of a query if it's the sole matching record.
+             *
+             * @param string|\Illuminate\Database\Query\Expression $column
+             * @return mixed 
+             * @throws \Illuminate\Database\Eloquent\ModelNotFoundException<\Illuminate\Database\Eloquent\Model>
+             * @throws \Illuminate\Database\MultipleRecordsFoundException
+             * @static 
+             */ 
+            public static function soleValue($column)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->soleValue($column);
             }
              
                 /**
@@ -19385,7 +19534,7 @@ namespace  {
              *
              * @template TWhenParameter
              * @template TWhenReturnType
-             * @param \Illuminate\Database\Eloquent\(callable($this):  TWhenParameter)|TWhenParameter  $value
+             * @param \Illuminate\Database\Eloquent\(\Closure($this):  TWhenParameter)|TWhenParameter  $value
              * @param \Illuminate\Database\Eloquent\(callable($this,  TWhenParameter): TWhenReturnType)|null  $callback
              * @param \Illuminate\Database\Eloquent\(callable($this,  TWhenParameter): TWhenReturnType)|null  $default
              * @return $this|\Illuminate\Database\Eloquent\TWhenReturnType 
@@ -19402,7 +19551,7 @@ namespace  {
              *
              * @template TUnlessParameter
              * @template TUnlessReturnType
-             * @param \Illuminate\Database\Eloquent\(callable($this):  TUnlessParameter)|TUnlessParameter  $value
+             * @param \Illuminate\Database\Eloquent\(\Closure($this):  TUnlessParameter)|TUnlessParameter  $value
              * @param \Illuminate\Database\Eloquent\(callable($this,  TUnlessParameter): TUnlessReturnType)|null  $callback
              * @param \Illuminate\Database\Eloquent\(callable($this,  TUnlessParameter): TUnlessReturnType)|null  $default
              * @return $this|\Illuminate\Database\Eloquent\TUnlessReturnType 
@@ -22025,6 +22174,7 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
             class Agent extends \Jenssegers\Agent\Facades\Agent {}
+            class ExportLocalization extends \KgBot\LaravelLocalization\Facades\ExportLocalizations {}
             class Bouncer extends \Silber\Bouncer\BouncerFacade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      
