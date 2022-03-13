@@ -97,7 +97,7 @@ class PhoneCodeController extends Controller
             || !max($dataFromCache['ttl'] - now()->timestamp, 0)
         ) {
             throw ValidationException::withMessages([
-                'code' => __('message.provided_code_expired')
+                'code' => __('The provided code was incorrect.')
             ]);
         }
 

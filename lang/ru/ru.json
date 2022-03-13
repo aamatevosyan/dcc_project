@@ -202,6 +202,7 @@
     "Email Address": "Email",
     "Email Addresses": "Email",
     "Email Password Reset Link": "Ссылка для сброса пароля",
+    "Email Verification": "Подтверждение почты",
     "Enable": "Включить",
     "Ensure your account is using a long, random password to stay secure.": "В целях безопасности убедитесь, что Вы используете длинный рандомный пароль.",
     "Equatorial Guinea": "Экваториальная Гвинея",
@@ -596,6 +597,7 @@
     "The provided coupon code is invalid.": "Предоставленный код купона недействителен.",
     "The provided password does not match your current password.": "Указанный пароль не соответствует Вашему текущему паролю.",
     "The provided password was incorrect.": "Неверный пароль.",
+    "The provided code was incorrect.": "Неверный код.",
     "The provided two factor authentication code was invalid.": "Неверный код двухфакторной аутентификации.",
     "The provided VAT number is invalid.": "Указанный номер НДС недействителен.",
     "The receipt emails must be valid email addresses.": "Email адреса для получения квитанций должны быть существующими.",
@@ -673,6 +675,7 @@
     "Venezuela, Bolivarian Republic of": "Венесуэла, Боливарианская Республика",
     "Verify Email Address": "Подтвердить email-адрес",
     "Verify Your Email Address": "Подтвердите Ваш email-адрес",
+    "Verify": "Подтвердите",
     "Viet Nam": "Вьетнам",
     "View": "Показать",
     "View Receipt": "Посмотреть квитанцию",
@@ -718,5 +721,6 @@
     "Zimbabwe": "Зимбабве",
     "Zip / Postal Code": "Индекс",
     "Åland Islands": "Аландские острова",
-    "Continue": "Продолжить"
+    "Continue": "Продолжить",
+    "Enter code": "Введите код"
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\Register\SendEmailCodeRequest;
 use App\Http\Requests\Auth\Register\ValidateEmailCodeRequest;
 use App\Jobs\SendCodeByEmail;
 use App\Models\User;
+use Arr;
 use Cache;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -82,10 +83,11 @@ class EmailCodeController extends Controller
     }
 
     /**
-     * Validate code sent by sms
-     * @param  ValidateEmailCodeRequest  $request
-     * @param  string  $uuid
+     * Validate code sent by email
+     * @param ValidateEmailCodeRequest $request
+     * @param string $uuid
      * @return RedirectResponse
+     * @throws ValidationException
      */
     public function destroy(ValidateEmailCodeRequest $request, string $uuid): RedirectResponse
     {
@@ -97,7 +99,7 @@ class EmailCodeController extends Controller
             || !max($dataFromCache['ttl'] - now()->timestamp, 0)
         ) {
             throw ValidationException::withMessages([
-                'code' => __('message.provided_code_expired')
+                'code' => __('The provided code was incorrect.')
             ]);
         }
 
