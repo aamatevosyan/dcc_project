@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\Register\ResendEmailCodeRequest;
 use App\Http\Requests\Auth\Register\SendEmailCodeRequest;
 use App\Http\Requests\Auth\Register\ValidateEmailCodeRequest;
-use App\Jobs\SendCodeByPhone;
+use App\Jobs\SendCodeByEmail;
 use App\Models\User;
 use Cache;
 use Illuminate\Http\RedirectResponse;
@@ -57,7 +57,7 @@ class EmailCodeController extends Controller
             now()->addDay()
         );
 
-        SendCodeByPhone::dispatch($request->email, $uuid);
+        SendCodeByEmail::dispatch($request->email, $uuid);
 
         return redirect()->route('auth.register.email.validate.show', compact('uuid'));
     }
@@ -141,7 +141,7 @@ class EmailCodeController extends Controller
             now()->addDay()
         );
 
-        SendCodeByPhone::dispatch($email, $uuid);
+        SendCodeByEmail::dispatch($email, $uuid);
 
         return redirect()->route('auth.register.email.validate.show', compact('uuid'));
     }
