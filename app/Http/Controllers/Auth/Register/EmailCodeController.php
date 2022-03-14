@@ -22,7 +22,7 @@ class EmailCodeController extends Controller
     /**
      * Show the register view.
      *
-     * @param Request  $request
+     * @param  Request  $request
      * @return InertiaResponse
      */
     public function create(Request $request): InertiaResponse
@@ -84,8 +84,8 @@ class EmailCodeController extends Controller
 
     /**
      * Validate code sent by email
-     * @param ValidateEmailCodeRequest $request
-     * @param string $uuid
+     * @param  ValidateEmailCodeRequest  $request
+     * @param  string  $uuid
      * @return RedirectResponse
      * @throws ValidationException
      */
@@ -105,7 +105,6 @@ class EmailCodeController extends Controller
 
         $user = User::firstOrCreate(
             ['email' => $dataFromCache['email']],
-            ['email_verified_at' => now()]
         );
 
         Cache::forget($cacheKey);

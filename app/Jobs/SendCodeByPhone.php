@@ -37,7 +37,7 @@ class SendCodeByPhone implements ShouldQueue
     public function handle(): void
     {
         $code = (string) random_int(10000, 99999);
-        $cacheKey = "auth.sendcode.phone.$this->uuid}";
+        $cacheKey = "auth.sendcode.phone.$this->uuid";
 
         //TODO: add Twilio send
 

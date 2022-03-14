@@ -22,7 +22,7 @@ class PhoneCodeController extends Controller
      * @param  Request  $request
      * @return InertiaResponse
      */
-    public function index(Request $request): InertiaResponse
+    public function create(Request $request): InertiaResponse
     {
         return Inertia::render('Auth/Phone/Send');
     }
