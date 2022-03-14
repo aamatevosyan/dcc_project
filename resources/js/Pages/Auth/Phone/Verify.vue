@@ -8,8 +8,8 @@
 
         <jet-validation-errors class="mb-4"/>
 
-        <h1 class="font-bold">Step 1: Email Verification</h1>
-        <p>An email with code was just sent to {{ $attrs.email }}</p>
+        <h1 class="font-bold">Step 2: Phone Verification</h1>
+        <h1>A sms with code was just sent to {{ $attrs.phone }}</h1>
         <form @submit.prevent="submit">
             <div class="mt-4">
                 <jet-label for="code" value="Enter code"/>
@@ -58,8 +58,8 @@ export default defineComponent({
     methods: {
         submit() {
             this.form.delete(
-                this.route('auth.register.email.validate.destroy', {
-                    uuid: this.$attrs.uuid
+                this.route('auth.register.phone.validate.destroy', {
+                    user: this.$attrs.user
                 })
             )
         }

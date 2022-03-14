@@ -12,6 +12,7 @@ use Arr;
 use Cache;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
@@ -35,6 +36,10 @@ class PhoneCodeController extends Controller
      */
     public function store(SendPhoneCodeRequest $request, User $user): RedirectResponse
     {
+        Log::debug($request->phone);
+        Log::debug($user);
+        Log::debug($user->uuid);
+        Log::debug($user->phone);
         // if user exists, redirect to finalize
         if ($user->phone) {
             return redirect()->route('auth.register.finalize.create', [

@@ -1,5 +1,5 @@
 <template>
-    <Head title="Verify"/>
+    <Head title="Register"/>
 
     <jet-authentication-card>
         <template #logo>
@@ -8,17 +8,16 @@
 
         <jet-validation-errors class="mb-4"/>
 
-        <h1 class="font-bold">Step 1: Email Verification</h1>
-        <p>An email with code was just sent to {{ $attrs.email }}</p>
+        <h1 class="font-bold">Step 2: Phone Verification</h1>
         <form @submit.prevent="submit">
             <div class="mt-4">
-                <jet-label for="code" value="Enter code"/>
-                <jet-input id="code" type="number" class="mt-1 block w-full" v-model="form.code" required/>
+                <jet-label for="phone" value="Phone"/>
+                <jet-input id="phone" type="tel" class="mt-1 block w-full" v-model="form.phone" required/>
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Verify
+                    Continue
                 </jet-button>
             </div>
         </form>
@@ -50,16 +49,16 @@ export default defineComponent({
     data() {
         return {
             form: this.$inertia.form({
-                code: ''
+                phone: ''
             })
         }
     },
 
     methods: {
         submit() {
-            this.form.delete(
-                this.route('auth.register.email.validate.destroy', {
-                    uuid: this.$attrs.uuid
+            console.log(this.$attrs.user)
+            this.form.post(this.route('auth.register.phone.store', {
+                    user: this.$attrs.user
                 })
             )
         }
