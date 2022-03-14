@@ -8,10 +8,10 @@ import { InertiaProgress } from '@inertiajs/progress';
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 //  TODO: Я пытался локаль настроить в vue как в laravel, пока забил https://github.com/kg-bot/laravel-localization-to-vue
-const default_locale = window.default_locale;
-const fallback_locale = window.fallback_locale;
-const messages = window.messages;
-const trans = new Lang( { messages, locale: default_locale, fallback: fallback_locale });
+// const default_locale = window.default_locale;
+// const fallback_locale = window.fallback_locale;
+// const messages = window.messages;
+// const trans = new Lang( { messages, locale: default_locale, fallback: fallback_locale });
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,

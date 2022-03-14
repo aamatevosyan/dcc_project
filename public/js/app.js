@@ -29195,15 +29195,11 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 var appName = ((_window$document$getE = window.document.getElementsByTagName('title')[0]) === null || _window$document$getE === void 0 ? void 0 : _window$document$getE.innerText) || 'Laravel'; //  TODO: Я пытался локаль настроить в vue как в laravel, пока забил https://github.com/kg-bot/laravel-localization-to-vue
+// const default_locale = window.default_locale;
+// const fallback_locale = window.fallback_locale;
+// const messages = window.messages;
+// const trans = new Lang( { messages, locale: default_locale, fallback: fallback_locale });
 
-var default_locale = window.default_locale;
-var fallback_locale = window.fallback_locale;
-var messages = window.messages;
-var trans = new (lang_js__WEBPACK_IMPORTED_MODULE_1___default())({
-  messages: messages,
-  locale: default_locale,
-  fallback: fallback_locale
-});
 (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.createInertiaApp)({
   title: function title(_title) {
     return "".concat(_title, " - ").concat(appName);
