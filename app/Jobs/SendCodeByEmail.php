@@ -43,9 +43,8 @@ class SendCodeByEmail implements ShouldQueue
             fn($m) => $m->to($this->email)->subject('Email Code Validation'));
 
         $data = Cache::get($cacheKey);
-        ray($cacheKey, $data);
         $data['code'] = $code;
 
-        ray(Cache::put($cacheKey, $data, now()->addDay()));
+        Cache::put($cacheKey, $data, now()->addDay());
     }
 }
