@@ -15,7 +15,7 @@ class ValidatePhoneCodeRequest extends FormRequest
     #[ArrayShape(['code' => "string"])] public function rules(): array
     {
         return [
-            'code' => 'required|string|numeric|size:5',
+            'code' => 'required|digits:5',
         ];
     }
 }

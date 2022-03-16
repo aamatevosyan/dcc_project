@@ -6,9 +6,10 @@
             <jet-authentication-card-logo/>
         </template>
 
+        <h1 class="font-bold">Step 2: Phone Verification</h1>
+
         <jet-validation-errors class="mb-4"/>
 
-        <h1 class="font-bold">Step 2: Phone Verification</h1>
         <form @submit.prevent="submit">
             <div class="mt-4">
                 <jet-label for="phone" value="Phone"/>
@@ -56,9 +57,8 @@ export default defineComponent({
 
     methods: {
         submit() {
-            console.log(this.$attrs.user)
             this.form.post(this.route('auth.register.phone.store', {
-                    user: this.$attrs.user
+                    user: this.$attrs.uuid
                 })
             )
         }

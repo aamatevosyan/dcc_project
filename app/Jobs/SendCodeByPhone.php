@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Queue\{InteractsWithQueue, SerializesModels};
 use Illuminate\Support\Facades\Cache;
 
@@ -39,6 +40,7 @@ class SendCodeByPhone implements ShouldQueue
         $code = (string) random_int(10000, 99999);
         $cacheKey = "auth.sendcode.phone.$this->uuid";
 
+        Log::debug($code);
         //TODO: add Twilio send
 
         $data = Cache::get($cacheKey);

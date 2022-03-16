@@ -6,9 +6,10 @@
             <jet-authentication-card-logo/>
         </template>
 
+        <h1 class="font-bold">Step 2: Phone Verification</h1>
+
         <jet-validation-errors class="mb-4"/>
 
-        <h1 class="font-bold">Step 2: Phone Verification</h1>
         <h1>A sms with code was just sent to {{ $attrs.phone }}</h1>
         <form @submit.prevent="submit">
             <div class="mt-4">
@@ -59,7 +60,7 @@ export default defineComponent({
         submit() {
             this.form.delete(
                 this.route('auth.register.phone.validate.destroy', {
-                    user: this.$attrs.user
+                    user: this.$attrs.uuid
                 })
             )
         }

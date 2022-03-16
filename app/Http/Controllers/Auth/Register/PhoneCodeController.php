@@ -23,9 +23,9 @@ class PhoneCodeController extends Controller
      * @param  Request  $request
      * @return InertiaResponse
      */
-    public function create(Request $request): InertiaResponse
+    public function create(Request $request, User $user): InertiaResponse
     {
-        return Inertia::render('Auth/Phone/Send');
+        return Inertia::render('Auth/Phone/Send', ["uuid" => $user->uuid]);
     }
 
     /**
@@ -36,10 +36,6 @@ class PhoneCodeController extends Controller
      */
     public function store(SendPhoneCodeRequest $request, User $user): RedirectResponse
     {
-        Log::debug($request->phone);
-        Log::debug($user);
-        Log::debug($user->uuid);
-        Log::debug($user->phone);
         // if user exists, redirect to finalize
         if ($user->phone) {
             return redirect()->route('auth.register.finalize.create', [
@@ -61,7 +57,7 @@ class PhoneCodeController extends Controller
 
         SendCodeByPhone::dispatch($request->phone, $uuid);
 
-        return redirect()->route('auth.register.phone.validate.show', compact('uuid'));
+        return redirect()->route('auth.register.phone.validate.show', ['user' => $user->uuid]);
     }
 
     /**

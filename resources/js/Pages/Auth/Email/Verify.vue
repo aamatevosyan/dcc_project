@@ -6,9 +6,10 @@
             <jet-authentication-card-logo/>
         </template>
 
+        <h1 class="font-bold">Step 1: Email Verification</h1>
+
         <jet-validation-errors class="mb-4"/>
 
-        <h1 class="font-bold">Step 1: Email Verification</h1>
         <p>An email with code was just sent to {{ $attrs.email }}</p>
         <form @submit.prevent="submit">
             <div class="mt-4">
