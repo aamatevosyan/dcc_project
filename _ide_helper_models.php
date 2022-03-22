@@ -16,11 +16,11 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $uuid
- * @property string $first_name
- * @property string $last_name
- * @property string $phone
+ * @property string|null $first_name
+ * @property string|null $last_name
+ * @property string|null $phone
  * @property string $email
- * @property string $password
+ * @property string|null $password
  * @property int $status
  * @property string|null $remember_token
  * @property int|null $current_team_id

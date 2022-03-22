@@ -16,6 +16,8 @@
         "laravel/jetstream": "^2.6",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
+        "pestphp/pest": "^1.16",
+        "pestphp/pest-plugin-laravel": "^1.1",
         "silber/bouncer": "^1.0",
         "tightenco/ziggy": "^1.0"
     },
@@ -78,6 +80,9 @@
                 "spatie/laravel-ray",
                 "barryvdh/laravel-debugbar"
             ]
+        },
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
         }
     },
     "minimum-stability": "dev",
