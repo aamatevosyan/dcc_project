@@ -8,6 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\{InteractsWithQueue, SerializesModels};
 use Illuminate\Support\Facades\{Cache, Mail};
+use Log;
 
 class SendCodeByEmail implements ShouldQueue
 {
@@ -38,6 +39,8 @@ class SendCodeByEmail implements ShouldQueue
     {
         $code = (string) random_int(10000, 99999);
         $cacheKey = "auth.sendcode.email.$this->uuid";
+
+        Log::debug("Phone code: {$this->uuid} => {$code}");
 
         Mail::send('auth.email-confirm', compact('code'),
             fn($m) => $m->to($this->email)->subject('Email Code Validation'));

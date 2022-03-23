@@ -195,7 +195,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+        'Twilio' => Aloha\Twilio\Support\Laravel\Facade::class,
     ])->toArray(),
 
 ];
