@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "aloha/twilio": "^5.0",
+        "backpack/crud": "^5.0",
         "guzzlehttp/guzzle": "^7.2",
         "inertiajs/inertia-laravel": "^0.5.2",
         "kg-bot/laravel-localization-to-vue": "^2",
@@ -23,7 +24,7 @@
         "tightenco/ziggy": "^1.0"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest",
+        "backpack/generators": "^3.1",
         "barryvdh/laravel-debugbar": "^3.6",
         "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
@@ -31,6 +32,7 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
+        "roave/security-advisories": "dev-latest",
         "spatie/laravel-ignition": "^1.0",
         "spatie/laravel-ray": "^1.29",
         "worksome/envy": "^0.3.1"
