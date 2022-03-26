@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5d2c15a7d1eddb204ab4f1eae12e4ed9",
+    "content-hash": "46b86111272655c769265d3f36c1c88f",
     "packages": [
         {
             "name": "aloha/twilio",
@@ -6626,131 +6626,6 @@
             "time": "2022-02-21T13:39:05+00:00"
         },
         {
-            "name": "spatie/pest-plugin-test-time",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/pest-plugin-test-time.git",
-                "reference": "ddbe01e3652987b5faf97baa3926c93f98ffd19e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/pest-plugin-test-time/zipball/ddbe01e3652987b5faf97baa3926c93f98ffd19e",
-                "reference": "ddbe01e3652987b5faf97baa3926c93f98ffd19e",
-                "shasum": ""
-            },
-            "require": {
-                "nesbot/carbon": "^2.50",
-                "pestphp/pest": "^1.10",
-                "php": "^8.0",
-                "spatie/test-time": "^1.2"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "src/Functions.php"
-                ],
-                "psr-4": {
-                    "Spatie\\PestPluginTestTime\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A Pest plugin to  control the flow of time",
-            "homepage": "https://github.com/spatie/pest-plugin-test-time",
-            "keywords": [
-                "pest-plugin-test-time",
-                "spatie"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/pest-plugin-test-time/issues",
-                "source": "https://github.com/spatie/pest-plugin-test-time/tree/1.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2021-07-25T20:06:08+00:00"
-        },
-        {
-            "name": "spatie/test-time",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/spatie/test-time.git",
-                "reference": "5738d4bff591d896d443785c6d787eb8cfa20e27"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/spatie/test-time/zipball/5738d4bff591d896d443785c6d787eb8cfa20e27",
-                "reference": "5738d4bff591d896d443785c6d787eb8cfa20e27",
-                "shasum": ""
-            },
-            "require": {
-                "nesbot/carbon": "^2.54",
-                "php": "^7.3|^8.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.5.10"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Spatie\\TestTime\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Alex Vanderbist",
-                    "email": "alex@spatie.be",
-                    "homepage": "https://spatie.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A small package to control the flow time",
-            "homepage": "https://github.com/spatie/test-time",
-            "keywords": [
-                "spatie",
-                "test-time"
-            ],
-            "support": {
-                "issues": "https://github.com/spatie/test-time/issues",
-                "source": "https://github.com/spatie/test-time/tree/1.3.0"
-            },
-            "funding": [
-                {
-                    "url": "https://spatie.be/open-source/support-us",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/spatie",
-                    "type": "github"
-                }
-            ],
-            "time": "2022-02-04T08:55:17+00:00"
-        },
-        {
             "name": "symfony/console",
             "version": "v6.0.5",
             "source": {
@@ -8891,20 +8766,19 @@
         },
         {
             "name": "tightenco/ziggy",
-            "version": "v1.4.5",
+            "version": "v1.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tighten/ziggy.git",
-                "reference": "d3c74474f624ab80b7fb4e3e264e62bb4043eee2"
+                "reference": "ad1b6590978efe3ec36ca404e91f8acaa6c742bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tighten/ziggy/zipball/d3c74474f624ab80b7fb4e3e264e62bb4043eee2",
-                "reference": "d3c74474f624ab80b7fb4e3e264e62bb4043eee2",
+                "url": "https://api.github.com/repos/tighten/ziggy/zipball/ad1b6590978efe3ec36ca404e91f8acaa6c742bd",
+                "reference": "ad1b6590978efe3ec36ca404e91f8acaa6c742bd",
                 "shasum": ""
             },
             "require": {
-                "ext-json": "*",
                 "laravel/framework": ">=5.4@dev"
             },
             "require-dev": {
@@ -8952,9 +8826,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tighten/ziggy/issues",
-                "source": "https://github.com/tighten/ziggy/tree/v1.4.5"
+                "source": "https://github.com/tighten/ziggy/tree/v1.4.4"
             },
-            "time": "2022-03-25T22:36:59+00:00"
+            "time": "2022-03-11T18:06:53+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -10109,12 +9983,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "2fcd9551cd31a444bbc43d221d483fa658d4c21b"
+                "reference": "a1696aadf99f7ff55d44c56e7ebf54eace85310c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/2fcd9551cd31a444bbc43d221d483fa658d4c21b",
-                "reference": "2fcd9551cd31a444bbc43d221d483fa658d4c21b",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/a1696aadf99f7ff55d44c56e7ebf54eace85310c",
+                "reference": "a1696aadf99f7ff55d44c56e7ebf54eace85310c",
                 "shasum": ""
             },
             "conflict": {
@@ -10347,7 +10221,7 @@
                 "phpoffice/phpspreadsheet": "<1.16",
                 "phpseclib/phpseclib": "<2.0.31|>=3,<3.0.7",
                 "phpservermon/phpservermon": "<=3.5.2",
-                "phpunit/phpunit": "<4.8.28|>=5,<5.6.3",
+                "phpunit/phpunit": ">=4.8.19,<4.8.28|>=5.0.10,<5.6.3",
                 "phpwhois/phpwhois": "<=4.2.5",
                 "phpxmlrpc/extras": "<0.6.1",
                 "pimcore/pimcore": "<=10.3.2",
@@ -10566,7 +10440,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-03-26T01:31:07+00:00"
+            "time": "2022-03-22T13:13:56+00:00"
         },
         {
             "name": "spatie/backtrace",

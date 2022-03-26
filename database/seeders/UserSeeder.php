@@ -23,5 +23,12 @@ class UserSeeder extends Seeder
         ]);
 
         $admin->assign('admin');
+
+        User::create([
+            'email' => 'user@dcc.ru',
+            'phone' => '+8999080825',
+            'password' => Hash::make('secret'),
+            'status' => User::STATUS_ACTIVE,
+        ]);
     }
 }
