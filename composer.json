@@ -21,7 +21,8 @@
         "pestphp/pest": "^1.16",
         "pestphp/pest-plugin-laravel": "^1.1",
         "silber/bouncer": "^1.0",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.0",
+        "spatie/pest-plugin-test-time": "1.0.0"
     },
     "require-dev": {
         "backpack/generators": "^3.1",
