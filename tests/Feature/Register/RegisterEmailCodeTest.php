@@ -1,11 +1,14 @@
 <?php
 
 use App\Models\User;
+use Tests\Feature\Register\RegisterUtils;
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function PHPUnit\Framework\assertEmpty;
+use function PHPUnit\Framework\assertFalse;
 use function PHPUnit\Framework\assertNotEquals;
+use function PHPUnit\Framework\assertTrue;
 use function Spatie\PestPluginTestTime\testTime;
 
 test('(Register Step 1) register screen can be rendered', function () {
@@ -27,25 +30,22 @@ test('(Register Step 1) valid email', function () {
         'email' => 'test@example.com'
     ]);
 
-    $uuid = getUuidFromResponse($response);
+    $uuid = RegisterUtils::getUuidFromResponse($response);
     $response->assertRedirect(route('auth.register.email.validate.show', $uuid));
+    assertTrue(RegisterUtils::hasEmailCodeInCache($uuid));
 });
 
 test('(Register Step 1) inactive user email exists', function () {
     // create inactive user with same email
     $email = 'test@example.com';
-    User::create([
-        'email' => $email,
-        'uuid' => Str::uuid()->toString(),
-        'status' => User::STATUS_INACTIVE
-    ]);
+    RegisterUtils::createUser($email, User::STATUS_INACTIVE);
 
     // try to store email and get code
     $response = postJson(route('auth.register.email.store'), [
         'email' => $email
     ]);
 
-    $uuid = getUuidFromResponse($response);
+    $uuid = RegisterUtils::getUuidFromResponse($response);
     // redirect to particular step since the user already exists
     $response->assertRedirect(route('auth.register.phone.create', $uuid));
 });
@@ -53,11 +53,7 @@ test('(Register Step 1) inactive user email exists', function () {
 test('(Register Step 1) active user email exists', function () {
     // create inactive user with same email
     $email = 'test@example.com';
-    User::create([
-        'email' => $email,
-        'uuid' => Str::uuid()->toString(),
-        'status' => User::STATUS_ACTIVE
-    ]);
+    RegisterUtils::createUser($email, User::STATUS_ACTIVE);
 
     // try to store email and get code
     $response = postJson(route('auth.register.email.store'), [
@@ -74,19 +70,19 @@ test('(Register Step 1) verify email code', function () {
         'email' => $email
     ]);
 
-    $uuid = getUuidFromResponse($response);
-    $code = getVerificationCodeFromCache($uuid);
+    $uuid = RegisterUtils::getUuidFromResponse($response);
+    $code = RegisterUtils::getEmailVerificationCodeFromCache($uuid);
 
     $response = deleteJson(route('auth.register.email.validate.destroy', $uuid), [
         'code' => $code
     ]);
 
     // redirect to particular step
-    $uuid = getUuidFromResponse($response);
+    $uuid = RegisterUtils::getUuidFromResponse($response);
     $response->assertRedirect(route('auth.register.phone.create', ['user' => $uuid]));
 
-    $user = User::whereEmail($email)->first();
-    assertEmpty($user->tokens);
+    assertEmpty(User::whereEmail($email)->first()->tokens);
+    assertFalse(RegisterUtils::hasEmailCodeInCache($uuid));
 });
 
 test('(Register Step 1) verify email with expired code', function () {
@@ -94,8 +90,8 @@ test('(Register Step 1) verify email with expired code', function () {
         'email' => 'test@example.com'
     ]);
 
-    $uuid = getUuidFromResponse($response);
-    $code = getVerificationCodeFromCache($uuid);
+    $uuid = RegisterUtils::getUuidFromResponse($response);
+    $code = RegisterUtils::getEmailVerificationCodeFromCache($uuid);
 
     // code expired
     testTime()->addSeconds(config('auth.email_code_timeout') + 100);
@@ -108,14 +104,14 @@ test('(Register Step 1) verify email with expired code', function () {
         ->assertJsonValidationErrors(['code']);
 });
 
-test('(Register Step 1) resend code', function () {
+test('(Register Step 1) resend email code', function () {
     $email = 'test@example.com';
     $response = postJson(route('auth.register.email.store'), [
         'email' => 'test@example.com'
     ]);
 
-    $uuid = getUuidFromResponse($response);
-    $oldCode = getVerificationCodeFromCache($uuid);
+    $uuid = RegisterUtils::getUuidFromResponse($response);
+    $oldCode = RegisterUtils::getEmailVerificationCodeFromCache($uuid);
 
     // try to resend code
     $response = postJson(route('auth.register.email.resend', $uuid), [
@@ -124,7 +120,7 @@ test('(Register Step 1) resend code', function () {
 
     $response->assertRedirect(route('auth.register.email.validate.show', $uuid));
 
-    $newCode = getVerificationCodeFromCache($uuid);
+    $newCode = RegisterUtils::getEmailVerificationCodeFromCache($uuid);
 
     assertNotEquals($oldCode, $newCode);
 });
@@ -135,7 +131,7 @@ test('(Register Step 1) resend expired code', function () {
         'email' => 'test@example.com'
     ]);
 
-    $uuid = getUuidFromResponse($response);
+    $uuid = RegisterUtils::getUuidFromResponse($response);
 
     // code expired
     testTime()->addSeconds(config('auth.email_code_timeout') + 100);
@@ -151,19 +147,7 @@ test('(Register Step 1) resend expired code', function () {
     $response = postJson(route('auth.register.email.store'), [
         'email' => 'test@example.com'
     ]);
-    $uuid = getUuidFromResponse($response);
+    $uuid = RegisterUtils::getUuidFromResponse($response);
     $response->assertRedirect(route('auth.register.email.validate.show', $uuid));
+    assertTrue(RegisterUtils::hasEmailCodeInCache($uuid));
 });
-
-function getUuidFromResponse($response): string
-{
-    $location = $response->headers->get('location');
-    return substr($location, strripos($location, "/") + 1);
-}
-
-function getVerificationCodeFromCache($uuid): string
-{
-    $cacheKey = "auth.sendcode.email.{$uuid}";
-    return Cache::get($cacheKey)['code'];
-}
-

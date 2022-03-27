@@ -68,6 +68,7 @@ class PhoneCodeController extends Controller
      */
     public function show(Request $request, User $user): RedirectResponse|InertiaResponse
     {
+        dd('asd');
         $uuid = $user->uuid;
 
         $cacheKey = "auth.sendcode.phone.{$uuid}";
@@ -102,7 +103,7 @@ class PhoneCodeController extends Controller
             ]);
         }
 
-        $user->update(['phone' => $request->phone]);
+        $user->update(['phone' => $dataFromCache['phone']]);
 
         Cache::forget($cacheKey);
 
@@ -117,7 +118,7 @@ class PhoneCodeController extends Controller
      */
     public function resend(ResendPhoneCodeRequest $request, User $user): RedirectResponse
     {
-        $uuid = $request->uuid;
+        $uuid = $user->uuid;
         $phone = $request->phone;
         $cacheKey = "auth.sendcode.phone.{$uuid}";
         $dataFromCache = Cache::get($cacheKey);
@@ -126,7 +127,7 @@ class PhoneCodeController extends Controller
             || $request->phone !== $dataFromCache['phone']
             || !max($dataFromCache['ttl'] - now()->timestamp, 0)
         ) {
-            return redirect()->route('auth.register.phone.create');
+            return redirect()->route('auth.register.phone.create', ['user' => $user]);
         }
 
         Cache::put(
@@ -141,6 +142,6 @@ class PhoneCodeController extends Controller
 
         SendCodeByPhone::dispatch($phone, $uuid);
 
-        return redirect()->route('auth.register.phone.validate.show', compact('uuid'));
+        return redirect()->route('auth.register.phone.validate.show', ['user' => $uuid]);
     }
 }
