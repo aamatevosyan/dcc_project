@@ -27,6 +27,6 @@ class RegisterController extends Controller
 
         $user->update($validated);
 
-        return redirect()->route(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME);
     }
 }
