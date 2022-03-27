@@ -31,7 +31,7 @@ class EmailCodeController extends Controller
     }
 
     /**
-     * Send 5 sign code via sms for validation
+     * Send 5 sign code via email for validation
      * @param  SendEmailCodeRequest  $request
      * @return RedirectResponse
      */

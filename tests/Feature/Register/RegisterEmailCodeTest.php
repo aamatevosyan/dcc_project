@@ -30,41 +30,63 @@ test('(Register Step 1) valid email', function () {
     $response->assertRedirect(route('auth.register.email.validate.show', $uuid));
 });
 
-//test('(Register Step 1) email exists', function () {
-//    $email = 'test@example.com';
-//    $uuid = Str::uuid()->toString();
-//
-//    User::create([
-//        'email' => $email,
-//        'uuid' => $uuid
-//    ]);
-//
-//    $response = postJson(route('auth.register.email.store'), [
-//        'email' => $email
-//    ]);
-//
-//    $response->assertRedirect(route('auth.register.phone.create', $uuid));
-//});
+test('(Register Step 1) inactive user email exists', function () {
+    // create inactive user with same email
+    $email = 'test@example.com';
+    User::create([
+        'email' => $email,
+        'uuid' => Str::uuid()->toString(),
+        'status' => User::STATUS_INACTIVE
+    ]);
 
-//test('(Register Step 1) verify email code', function () {
-//    $email = 'test@example.com';
-//    $response = postJson(route('auth.register.email.store'), [
-//        'email' => $email
-//    ]);
-//
-//    $uuid = getUuidFromResponse($response);
-//    $cacheKey = getEmailCodeCacheKey($uuid);
-//    $cacheData = Cache::get($cacheKey);
-//
-//    $response = deleteJson(route('auth.register.email.validate.destroy', $uuid), [
-//        'code' => $cacheData['code']
-//    ]);
-//
-//    $response->assertRedirect(route('auth.register.phone.create', ['user' => $uuid]));
-//
-//    $user = User::whereEmail($email)->first();
-//    assertEmpty($user->tokens);
-//});
+    // try to store email and get code
+    $response = postJson(route('auth.register.email.store'), [
+        'email' => $email
+    ]);
+
+    $uuid = getUuidFromResponse($response);
+    // redirect to particular step since the user already exists
+    $response->assertRedirect(route('auth.register.phone.create', $uuid));
+});
+
+test('(Register Step 1) active user email exists', function () {
+    // create inactive user with same email
+    $email = 'test@example.com';
+    User::create([
+        'email' => $email,
+        'uuid' => Str::uuid()->toString(),
+        'status' => User::STATUS_ACTIVE
+    ]);
+
+    // try to store email and get code
+    $response = postJson(route('auth.register.email.store'), [
+        'email' => $email
+    ]);
+
+    $response->assertStatus(422)
+        ->assertJsonValidationErrors(['email']);
+});
+
+test('(Register Step 1) verify email code', function () {
+    $email = 'test@example.com';
+    $response = postJson(route('auth.register.email.store'), [
+        'email' => $email
+    ]);
+
+    $uuid = getUuidFromResponse($response);
+    $code = getVerificationCodeFromCache($uuid);
+
+    $response = deleteJson(route('auth.register.email.validate.destroy', $uuid), [
+        'code' => $code
+    ]);
+
+    // redirect to particular step
+    $uuid = getUuidFromResponse($response);
+    $response->assertRedirect(route('auth.register.phone.create', ['user' => $uuid]));
+
+    $user = User::whereEmail($email)->first();
+    assertEmpty($user->tokens);
+});
 
 test('(Register Step 1) verify email with expired code', function () {
     $response = postJson(route('auth.register.email.store'), [
@@ -72,14 +94,13 @@ test('(Register Step 1) verify email with expired code', function () {
     ]);
 
     $uuid = getUuidFromResponse($response);
-    $cacheKey = getEmailCodeCacheKey($uuid);
-    $cacheData = Cache::get($cacheKey);
+    $code = getVerificationCodeFromCache($uuid);
 
     // token expired
     testTime()->addSeconds(config('auth.email_code_timeout') + 100);
 
     $response = deleteJson(route('auth.register.email.validate.destroy', $uuid), [
-        'code' => $cacheData['code']
+        'code' => $code
     ]);
 
     $response->assertStatus(422)
@@ -92,8 +113,9 @@ function getUuidFromResponse($response): string
     return substr($location, strripos($location, "/") + 1);
 }
 
-function getEmailCodeCacheKey($uuid)
+function getVerificationCodeFromCache($uuid): string
 {
-    return "auth.sendcode.email.{$uuid}";
+    $cacheKey = "auth.sendcode.email.{$uuid}";
+    return Cache::get($cacheKey)['code'];
 }
 
