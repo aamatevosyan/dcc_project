@@ -23,6 +23,7 @@ class RegisterController extends Controller
     {
         $validated = $request->validated();
         $validated['password'] = Hash::make($validated['password']);
+        $validated['status'] = User::STATUS_ACTIVE;
 
         $user->update($validated);
 

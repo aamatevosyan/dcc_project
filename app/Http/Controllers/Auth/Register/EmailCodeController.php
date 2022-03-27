@@ -38,7 +38,8 @@ class EmailCodeController extends Controller
     public function store(SendEmailCodeRequest $request): RedirectResponse
     {
         // if user exists, redirect to particular step
-        if ($user = User::active()->firstWhere('email', $request->email)) {
+        if ($user = User::query()->where('status', User::STATUS_INACTIVE)
+            ->firstWhere('email', $request->email)) {
             return redirect()->route('auth.register.phone.create', [
                 'user' => $user->uuid,
             ]);

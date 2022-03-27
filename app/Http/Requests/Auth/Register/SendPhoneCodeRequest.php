@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Auth\Register;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 use JetBrains\PhpStorm\ArrayShape;
 
 class SendPhoneCodeRequest extends FormRequest
@@ -15,7 +17,12 @@ class SendPhoneCodeRequest extends FormRequest
     #[ArrayShape(['phone' => "string"])] public function rules(): array
     {
         return [
-            'phone' => 'required|string|max:20|unique:users,phone',
+            'phone' => [
+                'required',
+                'string',
+                'max:20',
+                Rule::unique('users', 'email')->where('status', User::STATUS_ACTIVE),
+            ],
         ];
     }
 }
