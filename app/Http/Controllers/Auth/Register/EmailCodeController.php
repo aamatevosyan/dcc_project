@@ -130,7 +130,7 @@ class EmailCodeController extends Controller
             || $request->email !== $dataFromCache['email']
             || !max($dataFromCache['ttl'] - now()->timestamp, 0)
         ) {
-            return redirect()->route('register');
+            return redirect()->route('auth.register.email.create');
         }
 
         Cache::put(

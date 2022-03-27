@@ -5,6 +5,7 @@ use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function PHPUnit\Framework\assertEmpty;
+use function PHPUnit\Framework\assertNotEquals;
 use function Spatie\PestPluginTestTime\testTime;
 
 test('(Register Step 1) register screen can be rendered', function () {
@@ -96,7 +97,7 @@ test('(Register Step 1) verify email with expired code', function () {
     $uuid = getUuidFromResponse($response);
     $code = getVerificationCodeFromCache($uuid);
 
-    // token expired
+    // code expired
     testTime()->addSeconds(config('auth.email_code_timeout') + 100);
 
     $response = deleteJson(route('auth.register.email.validate.destroy', $uuid), [
@@ -105,6 +106,53 @@ test('(Register Step 1) verify email with expired code', function () {
 
     $response->assertStatus(422)
         ->assertJsonValidationErrors(['code']);
+});
+
+test('(Register Step 1) resend code', function () {
+    $email = 'test@example.com';
+    $response = postJson(route('auth.register.email.store'), [
+        'email' => 'test@example.com'
+    ]);
+
+    $uuid = getUuidFromResponse($response);
+    $oldCode = getVerificationCodeFromCache($uuid);
+
+    // try to resend code
+    $response = postJson(route('auth.register.email.resend', $uuid), [
+        'email' => $email
+    ]);
+
+    $response->assertRedirect(route('auth.register.email.validate.show', $uuid));
+
+    $newCode = getVerificationCodeFromCache($uuid);
+
+    assertNotEquals($oldCode, $newCode);
+});
+
+test('(Register Step 1) resend expired code', function () {
+    $email = 'test@example.com';
+    $response = postJson(route('auth.register.email.store'), [
+        'email' => 'test@example.com'
+    ]);
+
+    $uuid = getUuidFromResponse($response);
+
+    // code expired
+    testTime()->addSeconds(config('auth.email_code_timeout') + 100);
+
+    // try to resend code
+    $response = postJson(route('auth.register.email.resend', $uuid), [
+        'email' => $email
+    ]);
+
+    $response->assertRedirect(route('auth.register.email.create'));
+
+    // another try to send code
+    $response = postJson(route('auth.register.email.store'), [
+        'email' => 'test@example.com'
+    ]);
+    $uuid = getUuidFromResponse($response);
+    $response->assertRedirect(route('auth.register.email.validate.show', $uuid));
 });
 
 function getUuidFromResponse($response): string
