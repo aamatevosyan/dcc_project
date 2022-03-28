@@ -25,6 +25,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::middleware(['auth:sanctum', 'verified'])->get('/homepage', function () {
+    return Inertia::render('Homepage');
+})->name('homepage');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');

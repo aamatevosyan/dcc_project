@@ -87,8 +87,8 @@ class User extends Authenticatable
         return $query->where('status', self::STATUS_ACTIVE);
     }
 
-    public function getNameAttribute(): string
+    public function getProfilePhotoUrlAttribute(): string
     {
-        return $this->first_name.' '.$this->last_name;
+        return asset(\Storage::url($this->profile_photo_path));
     }
 }

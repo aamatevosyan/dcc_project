@@ -10,7 +10,7 @@
 
         <template #form>
             <!-- Profile Photo -->
-            <div class="col-span-6 sm:col-span-4" v-if="$page.props.jetstream.managesProfilePhotos">
+            <div class="col-span-6 sm:col-span-4">
                 <!-- Profile Photo File Input -->
                 <input type="file" class="hidden"
                             ref="photo"
@@ -20,12 +20,12 @@
 
                 <!-- Current Profile Photo -->
                 <div class="mt-2" v-show="! photoPreview">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
+                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-40 w-40 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
                 <div class="mt-2" v-show="photoPreview">
-                    <span class="block rounded-full w-20 h-20 bg-cover bg-no-repeat bg-center"
+                    <span class="block rounded-full w-40 h-40 bg-cover bg-no-repeat bg-center"
                           :style="'background-image: url(\'' + photoPreview + '\');'">
                     </span>
                 </div>
@@ -34,18 +34,25 @@
                     Select A New Photo
                 </jet-secondary-button>
 
-                <jet-secondary-button type="button" class="mt-2" @click.prevent="deletePhoto" v-if="user.profile_photo_path">
+                <jet-secondary-button type="button" class="mt-2" @click.prevent="deletePhoto" v-if="user.profile_photo_url">
                     Remove Photo
                 </jet-secondary-button>
 
                 <jet-input-error :message="form.errors.photo" class="mt-2" />
             </div>
 
-            <!-- Name -->
+            <!-- First Name -->
             <div class="col-span-6 sm:col-span-4">
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" autocomplete="name" />
-                <jet-input-error :message="form.errors.name" class="mt-2" />
+                <jet-label for="firstName" value="First name" />
+                <jet-input id="firstName" type="text" class="mt-1 block w-full" v-model="form.firstName" autocomplete="first name" />
+                <jet-input-error :message="form.errors.firstName" class="mt-2" />
+            </div>
+
+            <!-- Last Name -->
+            <div class="col-span-6 sm:col-span-4">
+                <jet-label for="lastName" value="Last name" />
+                <jet-input id="lastName" type="text" class="mt-1 block w-full" v-model="form.lastName" autocomplete="last name" />
+                <jet-input-error :message="form.errors.lastName" class="mt-2" />
             </div>
 
             <!-- Email -->
@@ -69,16 +76,16 @@
 </template>
 
 <script>
-    import { defineComponent } from 'vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import JetFormSection from '@/Jetstream/FormSection.vue'
-    import JetInput from '@/Jetstream/Input.vue'
-    import JetInputError from '@/Jetstream/InputError.vue'
-    import JetLabel from '@/Jetstream/Label.vue'
-    import JetActionMessage from '@/Jetstream/ActionMessage.vue'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
+import {defineComponent} from 'vue'
+import JetButton from '@/Jetstream/Button.vue'
+import JetFormSection from '@/Jetstream/FormSection.vue'
+import JetInput from '@/Jetstream/Input.vue'
+import JetInputError from '@/Jetstream/InputError.vue'
+import JetLabel from '@/Jetstream/Label.vue'
+import JetActionMessage from '@/Jetstream/ActionMessage.vue'
+import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
 
-    export default defineComponent({
+export default defineComponent({
         components: {
             JetActionMessage,
             JetButton,
@@ -95,7 +102,8 @@
             return {
                 form: this.$inertia.form({
                     _method: 'PUT',
-                    name: this.user.name,
+                    firstName: this.user.first_name,
+                    lastName: this.user.last_name,
                     email: this.user.email,
                     photo: null,
                 }),

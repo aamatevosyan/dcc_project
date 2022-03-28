@@ -1,6 +1,6 @@
 <template>
     <Link :href="'/'">
-        <svg class="w-16 h-16" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg v-if="svgClass" :class=svgClass viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_1_2)">
                 <path
                     d="M11.395 44.428C4.557 40.198 0 32.632 0 24C0 10.745 10.745 5.9892e-08 24 5.9892e-08C29.0229 -0.00803389 33.9206 1.56726 37.997 4.502C37.797 22.409 26.9 37.747 11.395 44.428V44.428Z"
@@ -25,12 +25,13 @@
 </template>
 
 <script>
-    import { defineComponent } from 'vue'
-    import { Link } from '@inertiajs/inertia-vue3';
+import {defineComponent} from 'vue'
+import {Link} from '@inertiajs/inertia-vue3';
 
-    export default defineComponent({
+export default defineComponent({
         components: {
             Link,
         },
+        props: ['svgClass']
     })
 </script>

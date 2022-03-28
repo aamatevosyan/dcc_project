@@ -3,7 +3,7 @@
 
     <jet-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo/>
+            <jet-authentication-card-logo svg-class="h-20 w-20" />
         </template>
 
         <h1 class="font-bold">Step 2: Phone Verification</h1>
