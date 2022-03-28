@@ -68,7 +68,6 @@ class PhoneCodeController extends Controller
      */
     public function show(Request $request, User $user): RedirectResponse|InertiaResponse
     {
-        dd('asd');
         $uuid = $user->uuid;
 
         $cacheKey = "auth.sendcode.phone.{$uuid}";

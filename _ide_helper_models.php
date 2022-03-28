@@ -12,6 +12,86 @@
 
 namespace App\Models{
 /**
+ * App\Models\ApiLog
+ *
+ * @property-read \App\Models\ApiService|null $apiService
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|ApiLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ApiLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ApiLog query()
+ * @mixin \Eloquent
+ */
+	class IdeHelperApiLog {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\ApiService
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|ApiService newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ApiService newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ApiService query()
+ * @mixin \Eloquent
+ */
+	class IdeHelperApiService {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\BankService
+ *
+ * @property-read \App\Models\ApiService|null $apiService
+ * @method static \Illuminate\Database\Eloquent\Builder|BankService newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankService newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|BankService query()
+ * @mixin \Eloquent
+ */
+	class IdeHelperBankService {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\LawRegistration
+ *
+ * @property-read \App\Models\LawService|null $bankService
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|LawRegistration newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LawRegistration newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LawRegistration query()
+ * @mixin \Eloquent
+ */
+	class IdeHelperLawRegistration {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\LawService
+ *
+ * @property-read \App\Models\ApiService|null $apiService
+ * @method static \Illuminate\Database\Eloquent\Builder|LawService newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LawService newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LawService query()
+ * @mixin \Eloquent
+ */
+	class IdeHelperLawService {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\PaymentAccount
+ *
+ * @property-read \App\Models\BankService|null $bankService
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentAccount newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentAccount newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PaymentAccount query()
+ * @mixin \Eloquent
+ */
+	class IdeHelperPaymentAccount {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
@@ -31,7 +111,6 @@ namespace App\Models{
  * @property string|null $two_factor_recovery_codes
  * @property-read \Illuminate\Database\Eloquent\Collection|\Silber\Bouncer\Database\Ability[] $abilities
  * @property-read int|null $abilities_count
- * @property-read string $name
  * @property-read string $profile_photo_url
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
