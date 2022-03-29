@@ -18,4 +18,7 @@ Route::controller(SfController::class)
 
         Route::patch('/update/{user:uuid}', 'update')
             ->name('update');
+
+        Route::get('/check/{user:uuid}', 'check')
+            ->name('check');
     });

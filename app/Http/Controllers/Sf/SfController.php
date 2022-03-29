@@ -18,9 +18,8 @@ class SfController extends Controller
 
     /**
      * create or update courier request
-     * @return InertiaResponse
      */
-    public function create(SendCourierRequest $request, User $user): InertiaResponse
+    public function create(SendCourierRequest $request, User $user)
     {
         try {
             $response = Forrest::sobjects('Lead', [
@@ -49,9 +48,8 @@ class SfController extends Controller
 
     /**
      * update courier status
-     * @return InertiaResponse
      */
-    public function update(UpdateCourierRequest $request, User $user): InertiaResponse
+    public function update(UpdateCourierRequest $request, User $user)
     {
         $sf_id = '00Q8d000002nh6jEAA'; // TODO брать из данных по $user->uuid
         try {
@@ -74,6 +72,24 @@ class SfController extends Controller
 //                    'Address' => $request->address,
 //                    'BirthDate' => $request->birth_date,
                 ],
+                'headers' => $this->defaultHeaders()
+            ]);
+        } catch (SalesforceException $e) {
+            throw ValidationException::withMessages($this->extractValidationMessages($e));
+        }
+        dd($response);
+    }
+
+    /**
+     * check courier status
+     * @return InertiaResponse
+     */
+    public function check(User $user)
+    {
+        $sf_id = '00Q8d000002nh6jEAA'; // TODO брать из данных по $user->uuid
+        try {
+            $response = Forrest::sobjects("Lead/$sf_id", [
+                'method' => 'get',
                 'headers' => $this->defaultHeaders()
             ]);
         } catch (SalesforceException $e) {
