@@ -99,8 +99,7 @@ export default defineComponent({
     methods: {
         sendCredentialsData() {
             this.form.patch(this.route('sf.courier.update'), {
-                preserveScroll: true,
-                onSuccess: () => null,
+                preserveScroll: true
             });
         },
     },

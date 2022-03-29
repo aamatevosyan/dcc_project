@@ -101,8 +101,7 @@ export default defineComponent({
     methods: {
         sendRegisterData() {
             this.form.post(this.route('sf.courier.create'), {
-                preserveScroll: true,
-                onSuccess: () => this.form.reset()
+                preserveScroll: true
             });
         },
     },

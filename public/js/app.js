@@ -24407,10 +24407,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     sendCredentialsData: function sendCredentialsData() {
       this.form.patch(this.route('sf.courier.update'), {
-        preserveScroll: true,
-        onSuccess: function onSuccess() {
-          return null;
-        }
+        preserveScroll: true
       });
     }
   }
@@ -24470,13 +24467,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     sendRegisterData: function sendRegisterData() {
-      var _this = this;
-
       this.form.post(this.route('sf.courier.create'), {
-        preserveScroll: true,
-        onSuccess: function onSuccess() {
-          return _this.form.reset();
-        }
+        preserveScroll: true
       });
     }
   }
@@ -29423,14 +29415,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       )])];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      var _this$$attrs$law_regi, _this$$attrs$law_regi2, _this$$attrs$payment_, _this$$attrs$payment_2;
+      var _this$$attrs, _this$$attrs$law_regi, _this$$attrs$law_regi2, _this$$attrs2, _this$$attrs2$payment, _this$$attrs2$payment2;
 
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_salesforce_register_form, {
-        data: (_this$$attrs$law_regi = _this.$attrs.law_registration) === null || _this$$attrs$law_regi === void 0 ? void 0 : (_this$$attrs$law_regi2 = _this$$attrs$law_regi.data) === null || _this$$attrs$law_regi2 === void 0 ? void 0 : _this$$attrs$law_regi2.body
+        data: (_this$$attrs = _this.$attrs) === null || _this$$attrs === void 0 ? void 0 : (_this$$attrs$law_regi = _this$$attrs.law_registration) === null || _this$$attrs$law_regi === void 0 ? void 0 : (_this$$attrs$law_regi2 = _this$$attrs$law_regi.data) === null || _this$$attrs$law_regi2 === void 0 ? void 0 : _this$$attrs$law_regi2.body
       }, null, 8
       /* PROPS */
       , ["data"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_salesforce_credentials_form, {
-        data: (_this$$attrs$payment_ = _this.$attrs.payment_account) === null || _this$$attrs$payment_ === void 0 ? void 0 : (_this$$attrs$payment_2 = _this$$attrs$payment_.data) === null || _this$$attrs$payment_2 === void 0 ? void 0 : _this$$attrs$payment_2.body
+        data: (_this$$attrs2 = _this.$attrs) === null || _this$$attrs2 === void 0 ? void 0 : (_this$$attrs2$payment = _this$$attrs2.payment_account) === null || _this$$attrs2$payment === void 0 ? void 0 : (_this$$attrs2$payment2 = _this$$attrs2$payment.data) === null || _this$$attrs2$payment2 === void 0 ? void 0 : _this$$attrs2$payment2.body
       }, null, 8
       /* PROPS */
       , ["data"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border)])])])];

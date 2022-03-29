@@ -51,7 +51,7 @@ class LawRegistration extends Model
             case self::STATUS_TO_BANK_APPLY:
                 return "To Bank Apply";
             case self::STATUS_SUCCESS:
-                return "Request Success";
+                return "Request Completed";
             default:
                 return "Undefined Request";
         }

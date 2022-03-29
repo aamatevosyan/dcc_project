@@ -30,7 +30,7 @@ class SfController extends Controller
             'LastName' => $user->last_name,
             'Email' => $user->email,
             'Phone' => $user->phone,
-            'Status' => LawRegistration::STATUS_NEW,
+            'RequestStatus__c' => LawRegistration::STATUS_NEW,
             'Company' => 'Delivery Club',
             'Inn__c' => $request->inn,
             'PassportCode__c' => $request->passport_code,
@@ -74,7 +74,7 @@ class SfController extends Controller
             [
                 'ind_code' => $response['id'],
                 'data' => $requestData,
-                'status' => $data['Status']
+                'status' => $data['RequestStatus__c']
             ]
         );
 
@@ -91,7 +91,7 @@ class SfController extends Controller
         $bankService = BankService::first();
 
         $data = [
-            'Status' => LawRegistration::STATUS_TO_BANK_APPLY,
+            'RequestStatus__c' => LawRegistration::STATUS_TO_BANK_APPLY,
             'CorrespondentAccount__c' => $request->correspondent_account,
             'Bik__c' => $request->bik,
             'Snils__c' => $request->snils,
@@ -136,11 +136,11 @@ class SfController extends Controller
             [
                 'ind_code' => $sf_id,
                 'data' => $requestData,
-                'status' => $data['Status']
+                'status' => $data['RequestStatus__c']
             ]
         );
         // update db law registration status
-        $lawRegistration->update(['status' => $data['Status']]);
+        $lawRegistration->update(['status' => $data['RequestStatus__c']]);
 
         return redirect()->route('forms');
     }
@@ -152,22 +152,23 @@ class SfController extends Controller
     {
         $user = auth()?->user();
         $lawService = LawService::first();
-        $lawRegistration = $lawService->lawRegistrations()->where('user_id', $user->id)->firstOrFail();;
+        $lawRegistration = $lawService->lawRegistrations()->where('user_id', $user->id)->first();
 
-        $sf_id = $lawRegistration->ind_code;
-        try {
-            Forrest::authenticate();
-            $response = Forrest::sobjects("Lead/$sf_id", [
-                'method' => 'get',
-                'headers' => $this->defaultHeaders()
-            ]);
+        if($lawRegistration != null) {
+            $sf_id = $lawRegistration->ind_code;
+            try {
+                Forrest::authenticate();
+                $response = Forrest::sobjects("Lead/$sf_id", [
+                    'method' => 'get',
+                    'headers' => $this->defaultHeaders()
+                ]);
 
-        } catch (SalesforceException $e) {
-            throw ValidationException::withMessages($this->extractValidationMessages($e));
+            } catch (SalesforceException $e) {
+                throw ValidationException::withMessages($this->extractValidationMessages($e));
+            }
+            // update db law registration status
+            $lawRegistration->update(['status' => $response['RequestStatus__c'] ?? 0]);
         }
-
-        // update db law registration status
-        $lawRegistration->update(['status' => $response['Status']]);
 
         return redirect()->route('forms');
     }
