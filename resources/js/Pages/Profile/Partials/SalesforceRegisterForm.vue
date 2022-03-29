@@ -15,12 +15,12 @@
                 <jet-label for="citizenship" value="Citizenship"/>
                 <select id="citizenship"
                         class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"
-                        v-model="form.citizenship">
+                        v-model="form.citizenship" required>
                     <option class="mt-1 block w-full" disabled value="">Choose citizenship</option>
-                    <option class="mt-1 block w-full" >Russian</option>
-                    <option class="mt-1 block w-full" >Belorussian</option>
-                    <option class="mt-1 block w-full" >NIS</option>
-                    <option class="mt-1 block w-full" >Kazakhstanian</option>
+                    <option class="mt-1 block w-full">Russian</option>
+                    <option class="mt-1 block w-full">Belorussian</option>
+                    <option class="mt-1 block w-full">NIS</option>
+                    <option class="mt-1 block w-full">Kazakhstanian</option>
                 </select>
                 <jet-input-error :message="form.errors.citizenship" class="mt-2"/>
             </div>
@@ -28,14 +28,15 @@
             <!-- INN -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="inn" value="INN"/>
-                <jet-input id="inn" type="text" class="mt-1 block w-full" v-model="form.inn" autocomplete="0123456789"/>
+                <jet-input id="inn" type="text" class="mt-1 block w-full" v-model="form.inn" required
+                           autocomplete="0123456789"/>
                 <jet-input-error :message="form.errors.inn" class="mt-2"/>
             </div>
 
             <!-- Passport Code -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="passportCode" value="Passport code"/>
-                <jet-input id="passportCode" type="text" class="mt-1 block w-full" v-model="form.passportCode"
+                <jet-input id="passportCode" type="text" class="mt-1 block w-full" v-model="form.passportCode" required
                            autocomplete="0000"/>
                 <jet-input-error :message="form.errors.passportCode" class="mt-2"/>
             </div>
@@ -43,7 +44,7 @@
             <!-- Passport Number -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="passportNum" value="Passport number"/>
-                <jet-input id="passportNum" type="text" class="mt-1 block w-full" v-model="form.passportNum"
+                <jet-input id="passportNum" type="text" class="mt-1 block w-full" v-model="form.passportNum" required
                            autocomplete="000000"/>
                 <jet-input-error :message="form.errors.passportNum" class="mt-2"/>
             </div>
@@ -54,7 +55,8 @@
                 Success
             </jet-action-message>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" class="bg-green-500 hover:bg-green-400" :disabled="form.processing">
+            <jet-button :class="{ 'opacity-25': form.processing }" class="bg-green-500 hover:bg-green-400"
+                        :disabled="form.processing">
                 Send
             </jet-button>
         </template>
@@ -99,11 +101,10 @@ export default defineComponent({
     methods: {
         sendRegisterData() {
             console.log(this.form);
-            /*this.form.post(route('sf.courier.create'), {
-                errorBag: 'updateProfileInformation',
+            this.form.post(this.route('sf.courier.create'), {
                 preserveScroll: true,
                 onSuccess: () => null,
-            });*/
+            });
         },
     },
 })

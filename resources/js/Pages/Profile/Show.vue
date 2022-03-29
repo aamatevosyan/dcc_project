@@ -8,17 +8,6 @@
 
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-                <div>
-                    <salesforce-credentials-form :user="$page.props.user" />
-
-                    <jet-section-border />
-                </div>
-
-                <div>
-                    <salesforce-register-form :user="$page.props.user" />
-
-                    <jet-section-border />
-                </div>
 
                 <div v-if="$page.props.jetstream.canUpdateProfileInformation">
                     <update-profile-information-form :user="$page.props.user" />
@@ -58,16 +47,12 @@ import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
 import LogoutOtherBrowserSessionsForm from '@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue'
 import TwoFactorAuthenticationForm from '@/Pages/Profile/Partials/TwoFactorAuthenticationForm.vue'
 import UpdatePasswordForm from '@/Pages/Profile/Partials/UpdatePasswordForm.vue'
-import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue'
-import SalesforceRegisterForm from "@/Pages/Profile/Partials/SalesforceRegisterForm";
-import SalesforceCredentialsForm from "@/Pages/Profile/Partials/SalesforceCredentialsForm";
+import UpdateProfileInformationForm from '@/Pages/Profile/Partials/UpdateProfileInformationForm.vue';
 
 export default defineComponent({
         props: ['sessions'],
 
         components: {
-            SalesforceCredentialsForm,
-            SalesforceRegisterForm,
             AppLayout,
             DeleteUserForm,
             JetSectionBorder,

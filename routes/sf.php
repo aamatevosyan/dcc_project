@@ -16,9 +16,9 @@ Route::controller(SfController::class)
         Route::post('/create', 'create')
             ->name('create');
 
-        Route::patch('/update/{user:uuid}', 'update')
+        Route::patch('/update', 'update')
             ->name('update');
 
-        Route::get('/check/{user:uuid}', 'check')
+        Route::get('/check/', 'check')
             ->name('check');
     });

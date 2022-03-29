@@ -23,8 +23,8 @@
                             </div>
 
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                <jet-nav-link :href="route('forms')" :active="route().current('forms')">
+                                    Courier Forms
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -150,12 +150,6 @@
                             Homepage
                         </jet-responsive-nav-link>
                     </div>
-
-<!--                    <div class="pt-2 pb-3 space-y-1">-->
-<!--                        <jet-responsive-nav-link :href="route('dashboard')" :active="route().current('dashboard')">-->
-<!--                            Dashboard-->
-<!--                        </jet-responsive-nav-link>-->
-<!--                    </div>-->
 
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">

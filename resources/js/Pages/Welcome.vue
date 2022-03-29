@@ -3,24 +3,54 @@
 
     <div
         class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">
-        <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-            <Link v-if="$page.props.user" :href="route('homepage')" class="text-sm text-gray-700 underline">
-                Homepage
-            </Link>
+        <div v-if="canLogin">
+            <div v-if="$page.props.user" class="p-10 lg:flex lg:items-center lg:justify-between">
+                <div class="flex-1 min-w-0">
+                    <p class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl selection:bg-fuchsia-300 select-none">
+                        Delivery Club Courier Platform
+                    </p>
+                </div>
+                <div class="mt-5 flex lg:mt-0 lg:ml-6">
+                    <div class="mr-3 inline-flex rounded-md shadow text-white bg-green-500 hover:bg-green-600">
+                        <Link :href="route('homepage')"
+                              class="px-8 py-4 font-bold text-center rounded-md select-none">
+                            Homepage
+                        </Link>
+                    </div>
 
-            <Link v-if="$page.props.user" :href="route('dashboard')" class="text-sm text-gray-700 underline">
-                Dashboard
-            </Link>
+                    <div class="ml-3 text-green-600 bg-white hover:bg-green-50 inline-flex rounded-md shadow">
+                        <Link v-if="$page.props.user" :href="route('forms')"
+                              class="px-8 py-4 font-bold text-center rounded-md select-none">
+                            Courier Forms
+                        </Link>
+                    </div>
+                </div>
+            </div>
 
             <template v-else>
-                <Link :href="route('login')" class="text-sm text-gray-700 underline">
-                    Log in
-                </Link>
+                <div class="p-10 lg:flex lg:items-center lg:justify-between">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl selection:bg-fuchsia-300 select-none">
+                            Delivery Club Courier Platform
+                        </p>
+                    </div>
+                    <div class="mt-5 flex lg:mt-0 lg:ml-6">
+                        <div class="mr-3 inline-flex rounded-md shadow text-white bg-green-500 hover:bg-green-600">
+                            <Link :href="route('login')"
+                                  class="px-8 py-4 font-bold text-center rounded-md select-none">
+                                Log in
+                            </Link>
+                        </div>
 
-                <Link v-if="canRegister" :href="route('auth.register.email.create')"
-                      class="ml-4 text-sm text-gray-700 underline">
-                    Register
-                </Link>
+
+                        <div class="ml-3 text-green-600 bg-white hover:bg-green-50 inline-flex rounded-md shadow">
+                            <Link v-if="canRegister" :href="route('auth.register.email.create')"
+                                  class="px-8 py-4 font-bold text-center rounded-md select-none">
+                                Register
+                            </Link>
+                        </div>
+                    </div>
+                </div>
             </template>
         </div>
     </div>
@@ -92,12 +122,14 @@
 
 <script>
 import {defineComponent} from 'vue'
-import {Head, Link} from '@inertiajs/inertia-vue3';
+import {Head, Link} from '@inertiajs/inertia-vue3'
+import JetAuthenticationCardLogo from "@/Jetstream/AuthenticationCardLogo"
 
 export default defineComponent({
     components: {
         Head,
         Link,
+        JetAuthenticationCardLogo
     },
 
     props: {
