@@ -14,15 +14,15 @@
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="correspondentAccount" value="Correspondent Account"/>
                 <jet-input id="correspondentAccount" type="text" class="mt-1 block w-full"
-                           v-model="form.correspondentAccount" autocomplete=""/>
-                <jet-input-error :message="form.errors.correspondentAccount" class="mt-2"/>
+                           v-model="form.correspondent_account" autocomplete=""/>
+                <jet-input-error :message="form.errors.correspondent_account" class="mt-2"/>
             </div>
 
             <!-- BIC -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="bic" value="BIC"/>
-                <jet-input id="bic" type="text" class="mt-1 block w-full" v-model="form.bic" autocomplete=""/>
-                <jet-input-error :message="form.errors.bic" class="mt-2"/>
+                <jet-input id="bic" type="text" class="mt-1 block w-full" v-model="form.bik" autocomplete=""/>
+                <jet-input-error :message="form.errors.bik" class="mt-2"/>
             </div>
 
             <!-- SNILS -->
@@ -35,16 +35,16 @@
             <!-- Address -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="address" value="Your address"/>
-                <jet-input id="address" type="select" class="mt-1 block w-full" v-model="form.address" autocomplete=""/>
+                <jet-input id="address" type="text" class="mt-1 block w-full" v-model="form.address" autocomplete=""/>
                 <jet-input-error :message="form.errors.address" class="mt-2"/>
             </div>
 
             <!-- Birth Date -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="birthDate" value="Your birth date"/>
-                <jet-input id="birthDate" type="date" class="mt-1 block w-full" v-model="form.birthDate"
+                <jet-input id="birthDate" type="date" class="mt-1 block w-full" v-model="form.birth_date"
                            autocomplete=""/>
-                <jet-input-error :message="form.errors.birthDate" class="mt-2"/>
+                <jet-input-error :message="form.errors.birth_date" class="mt-2"/>
             </div>
         </template>
 
@@ -87,19 +87,17 @@ export default defineComponent({
     data() {
         return {
             form: this.$inertia.form({
-                _method: 'PUSH',
-                correspondentAccount: null,
-                bic: null,
-                snils: null,
-                address: null,
-                birthDate: null,
+                correspondent_account: '',
+                bik: '',
+                snils: '',
+                address: '',
+                birth_date: '',
             }),
         }
     },
 
     methods: {
         sendCredentialsData() {
-            console.log(this.form);
             this.form.patch(this.route('sf.courier.update'), {
                 preserveScroll: true,
                 onSuccess: () => null,

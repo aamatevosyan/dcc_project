@@ -15,7 +15,7 @@
                 <jet-label for="citizenship" value="Citizenship"/>
                 <select id="citizenship"
                         class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full"
-                        v-model="form.citizenship" required>
+                        v-model="form.citizenship">
                     <option class="mt-1 block w-full" disabled value="">Choose citizenship</option>
                     <option class="mt-1 block w-full">Russian</option>
                     <option class="mt-1 block w-full">Belorussian</option>
@@ -36,17 +36,17 @@
             <!-- Passport Code -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="passportCode" value="Passport code"/>
-                <jet-input id="passportCode" type="text" class="mt-1 block w-full" v-model="form.passportCode" required
+                <jet-input id="passportCode" type="text" class="mt-1 block w-full" v-model="form.passport_code" required
                            autocomplete="0000"/>
-                <jet-input-error :message="form.errors.passportCode" class="mt-2"/>
+                <jet-input-error :message="form.errors.passport_code" class="mt-2"/>
             </div>
 
             <!-- Passport Number -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="passportNum" value="Passport number"/>
-                <jet-input id="passportNum" type="text" class="mt-1 block w-full" v-model="form.passportNum" required
+                <jet-input id="passportNum" type="text" class="mt-1 block w-full" v-model="form.passport_num" required
                            autocomplete="000000"/>
-                <jet-input-error :message="form.errors.passportNum" class="mt-2"/>
+                <jet-input-error :message="form.errors.passport_num" class="mt-2"/>
             </div>
         </template>
 
@@ -71,7 +71,7 @@ import JetInput from '@/Jetstream/Input.vue'
 import JetInputError from '@/Jetstream/InputError.vue'
 import JetLabel from '@/Jetstream/Label.vue'
 import JetActionMessage from '@/Jetstream/ActionMessage.vue'
-import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
+import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue';
 
 export default defineComponent({
     components: {
@@ -89,21 +89,19 @@ export default defineComponent({
     data() {
         return {
             form: this.$inertia.form({
-                _method: 'PUSH',
-                inn: null,
-                citizenship: null,
-                passportCode: null,
-                passportNum: null,
+                inn: '',
+                citizenship: '',
+                passport_code: '',
+                passport_num: '',
             }),
         }
     },
 
     methods: {
         sendRegisterData() {
-            console.log(this.form);
             this.form.post(this.route('sf.courier.create'), {
                 preserveScroll: true,
-                onSuccess: () => null,
+                onSuccess: () => this.form.reset()
             });
         },
     },

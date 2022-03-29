@@ -24386,18 +24386,16 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: this.$inertia.form({
-        _method: 'PUSH',
-        correspondentAccount: null,
-        bic: null,
-        snils: null,
-        address: null,
-        birthDate: null
+        correspondent_account: '',
+        bik: '',
+        snils: '',
+        address: '',
+        birth_date: ''
       })
     };
   },
   methods: {
     sendCredentialsData: function sendCredentialsData() {
-      console.log(this.form);
       this.form.patch(this.route('sf.courier.update'), {
         preserveScroll: true,
         onSuccess: function onSuccess() {
@@ -24451,21 +24449,21 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: this.$inertia.form({
-        _method: 'PUSH',
-        inn: null,
-        citizenship: null,
-        passportCode: null,
-        passportNum: null
+        inn: '',
+        citizenship: '',
+        passport_code: '',
+        passport_num: ''
       })
     };
   },
   methods: {
     sendRegisterData: function sendRegisterData() {
-      console.log(this.form);
+      var _this = this;
+
       this.form.post(this.route('sf.courier.create'), {
         preserveScroll: true,
         onSuccess: function onSuccess() {
-          return null;
+          return _this.form.reset();
         }
       });
     }
@@ -29954,15 +29952,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "correspondentAccount",
         type: "text",
         "class": "mt-1 block w-full",
-        modelValue: _ctx.form.correspondentAccount,
+        modelValue: _ctx.form.correspondent_account,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
-          return _ctx.form.correspondentAccount = $event;
+          return _ctx.form.correspondent_account = $event;
         }),
         autocomplete: ""
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: _ctx.form.errors.correspondentAccount,
+        message: _ctx.form.errors.correspondent_account,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -29973,15 +29971,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "bic",
         type: "text",
         "class": "mt-1 block w-full",
-        modelValue: _ctx.form.bic,
+        modelValue: _ctx.form.bik,
         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
-          return _ctx.form.bic = $event;
+          return _ctx.form.bik = $event;
         }),
         autocomplete: ""
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: _ctx.form.errors.bic,
+        message: _ctx.form.errors.bik,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -30009,7 +30007,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         value: "Your address"
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input, {
         id: "address",
-        type: "select",
+        type: "text",
         "class": "mt-1 block w-full",
         modelValue: _ctx.form.address,
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
@@ -30030,15 +30028,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "birthDate",
         type: "date",
         "class": "mt-1 block w-full",
-        modelValue: _ctx.form.birthDate,
+        modelValue: _ctx.form.birth_date,
         "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
-          return _ctx.form.birthDate = $event;
+          return _ctx.form.birth_date = $event;
         }),
         autocomplete: ""
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: _ctx.form.errors.birthDate,
+        message: _ctx.form.errors.birth_date,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -30183,8 +30181,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm mt-1 block w-full",
         "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
           return _ctx.form.citizenship = $event;
-        }),
-        required: ""
+        })
       }, _hoisted_9, 512
       /* NEED_PATCH */
       ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.form.citizenship]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
@@ -30219,16 +30216,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "passportCode",
         type: "text",
         "class": "mt-1 block w-full",
-        modelValue: _ctx.form.passportCode,
+        modelValue: _ctx.form.passport_code,
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-          return _ctx.form.passportCode = $event;
+          return _ctx.form.passport_code = $event;
         }),
         required: "",
         autocomplete: "0000"
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: _ctx.form.errors.passportCode,
+        message: _ctx.form.errors.passport_code,
         "class": "mt-2"
       }, null, 8
       /* PROPS */
@@ -30239,16 +30236,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         id: "passportNum",
         type: "text",
         "class": "mt-1 block w-full",
-        modelValue: _ctx.form.passportNum,
+        modelValue: _ctx.form.passport_num,
         "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
-          return _ctx.form.passportNum = $event;
+          return _ctx.form.passport_num = $event;
         }),
         required: "",
         autocomplete: "000000"
       }, null, 8
       /* PROPS */
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_input_error, {
-        message: _ctx.form.errors.passportNum,
+        message: _ctx.form.errors.passport_num,
         "class": "mt-2"
       }, null, 8
       /* PROPS */

@@ -12,14 +12,9 @@ class UpdateCourierRequest extends FormRequest
      *
      * @return array
      */
-    #[ArrayShape(['inn' => "string", 'citizenship' => "string", 'passport_code' => "string", 'passport_num' => "string", 'correspondent_account' => "string", 'bik' => "string", 'snils' => "string", 'address' => "string", 'birth_date' => "string"])]
-    public function rules(): array
+    #[ArrayShape(['correspondent_account' => "string", 'bik' => "string", 'snils' => "string", 'address' => "string", 'birth_date' => "string"])] public function rules(): array
     {
         return [
-            'inn' => 'required|digits_between:10,12',
-            'citizenship' => 'required',
-            'passport_code' => 'required|numeric|gt:0',
-            'passport_num' => 'required|numeric|gt:0',
             'correspondent_account' => 'required',
             'bik' => 'required',
             'snils' => 'required',

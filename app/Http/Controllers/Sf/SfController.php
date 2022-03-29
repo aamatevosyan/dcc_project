@@ -31,10 +31,10 @@ class SfController extends Controller
             'Phone' => $user->phone,
             'Status' => LawRegistration::STATUS_NEW,
             'Company' => 'Delivery Club',
-            'Inn' => $request->inn,
-            'PassportCode' => $request->passport_code,
-            'PassportNum' => $request->passport_num,
-            'Citizenship' => $request->citizenship,
+            'Inn__c' => $request->inn,
+            'PassportCode__c' => $request->passport_code,
+            'PassportNum__c' => $request->passport_num,
+            'Citizenship__c' => $request->citizenship,
         ];
 
         $requestData = [
@@ -52,6 +52,7 @@ class SfController extends Controller
         ]);
 
         try {
+            Forrest::authenticate();
             $response = Forrest::sobjects('Lead', $requestData);
             // log lawService response
             $apiLog->update([
@@ -60,19 +61,19 @@ class SfController extends Controller
         } catch (SalesforceException $e) {
             // log lawService error as response
             $apiLog->update([
-                'response' => ['error' => $e->getMessage()]
+                'response' => ['error' => json_decode($e->getMessage())]
             ]);
             throw ValidationException::withMessages($this->extractValidationMessages($e));
         }
 
         // update db law registration info
-        $lawService->lawRegistrations()->updateOrCreate([
+        $res = $lawService->lawRegistrations()->updateOrCreate([
             'user_id' => $user->id,
         ],
             [
                 'ind_code' => $response['id'],
                 'data' => $response,
-                'status' => $data['status']
+                'status' => $data['Status']
             ]
         );
 
@@ -90,11 +91,11 @@ class SfController extends Controller
 
         $data = [
             'Status' => LawRegistration::STATUS_TO_BANK_APPLY,
-            'CorrespondentAccount' => $request->correspondent_account,
-            'Bik' => $request->bik,
-            'Snils' => $request->snils,
-            'Address' => $request->address,
-            'BirthDate' => $request->birth_date,
+            'CorrespondentAccount__c' => $request->correspondent_account,
+            'Bik__c' => $request->bik,
+            'Snils__c' => $request->snils,
+            'CurrentAddress__c' => $request->address,
+            'BirthDate__c' => $request->birth_date,
         ];
 
         $requestData = [
@@ -104,7 +105,7 @@ class SfController extends Controller
         ];
 
         // log bankService request to db
-        $lawRegistration = $lawService->lawRegistrations()->findOrFail($user->uuid);
+        $lawRegistration = $lawService->lawRegistrations()->where('user_id', $user->id)->firstOrFail();
         $apiLog = $bankService->apiService->apiLogs()->updateOrCreate([
             'user_id' => $user->id,
         ], [
@@ -113,6 +114,7 @@ class SfController extends Controller
 
         $sf_id = $lawRegistration->ind_code;
         try {
+            Forrest::authenticate();
             $response = Forrest::sobjects("Lead/$sf_id", $requestData);
             // log bankService response
             $apiLog->update([
@@ -121,13 +123,13 @@ class SfController extends Controller
         } catch (SalesforceException $e) {
             // log bankService error as response
             $apiLog->update([
-                'response' => ['error' => $e->getMessage()]
+                'response' => ['error' => json_decode($e->getMessage())]
             ]);
             throw ValidationException::withMessages($this->extractValidationMessages($e));
         }
 
         // update db law registration status
-        $lawRegistration->update(['status' => $data['status']]);
+        $lawRegistration->update(['status' => $data['Status']]);
 
         return redirect(RouteServiceProvider::HOME);
     }
@@ -143,6 +145,7 @@ class SfController extends Controller
 
         $sf_id = $lawRegistration->ind_code;
         try {
+            Forrest::authenticate();
             $response = Forrest::sobjects("Lead/$sf_id", [
                 'method' => 'get',
                 'headers' => $this->defaultHeaders()

@@ -13,8 +13,9 @@ class LawRegistration extends Model
 {
     use HasFactory;
 
-    public const STATUS_NEW = 'new';
-    public const STATUS_TO_BANK_APPLY = 'to_bank_apply';
+    public const STATUS_NEW = 0;
+    public const STATUS_TO_BANK_APPLY = 1;
+    public const STATUS_SUCCESS = 2;
 
     protected $fillable = [
         'id',
