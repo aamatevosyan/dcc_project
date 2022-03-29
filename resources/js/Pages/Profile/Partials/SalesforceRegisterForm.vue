@@ -88,7 +88,6 @@ export default defineComponent({
     props: ['data'],
 
     data() {
-        console.log(this.data);
         return {
             form: this.$inertia.form({
                 inn: this.data?.Inn__c,

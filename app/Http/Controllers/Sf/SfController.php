@@ -78,7 +78,7 @@ class SfController extends Controller
             ]
         );
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('forms');
     }
 
     /**
@@ -142,13 +142,13 @@ class SfController extends Controller
         // update db law registration status
         $lawRegistration->update(['status' => $data['Status']]);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('forms');
     }
 
     /**
      * check courier status
      */
-    public function check()
+    public function check(): RedirectResponse
     {
         $user = auth()?->user();
         $lawService = LawService::first();
@@ -168,6 +168,8 @@ class SfController extends Controller
 
         // update db law registration status
         $lawRegistration->update(['status' => $response['Status']]);
+
+        return redirect()->route('forms');
     }
 
     #[ArrayShape(['Sforce-Auto-Assign' => "string", 'Content-Type' => "string"])]

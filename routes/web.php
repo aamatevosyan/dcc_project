@@ -36,6 +36,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/forms', function () {
     $paymentAccount = BankService::first()->paymentAccounts()->where('user_id', $user->id)->first();
     return Inertia::render('CourierForms', [
         'law_registration' => $lawRegistration?->toArray(),
-        'payment_account' => $paymentAccount?->toArray()
+        'payment_account' => $paymentAccount?->toArray(),
+        'request_status' => $lawRegistration?->getStatusName() ?? 'Undefined'
     ]);
 })->name('forms');

@@ -280,7 +280,7 @@ export default defineComponent({
 
             logout() {
                 this.$inertia.post(route('logout'));
-            },
+            }
         }
     })
 </script>

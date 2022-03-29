@@ -24118,6 +24118,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pages_Profile_Partials_SalesforceRegisterForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Pages/Profile/Partials/SalesforceRegisterForm */ "./resources/js/Pages/Profile/Partials/SalesforceRegisterForm.vue");
 /* harmony import */ var _Pages_Profile_Partials_SalesforceCredentialsForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Pages/Profile/Partials/SalesforceCredentialsForm */ "./resources/js/Pages/Profile/Partials/SalesforceCredentialsForm.vue");
 /* harmony import */ var _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Jetstream/SectionBorder */ "./resources/js/Jetstream/SectionBorder.vue");
+/* harmony import */ var _Jetstream_Button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Jetstream/Button */ "./resources/js/Jetstream/Button.vue");
+
 
 
 
@@ -24129,8 +24131,14 @@ __webpack_require__.r(__webpack_exports__);
     AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Welcome: _Jetstream_Welcome_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     JetSectionBorder: _Jetstream_SectionBorder__WEBPACK_IMPORTED_MODULE_5__["default"],
+    JetButton: _Jetstream_Button__WEBPACK_IMPORTED_MODULE_6__["default"],
     SalesforceCredentialsForm: _Pages_Profile_Partials_SalesforceCredentialsForm__WEBPACK_IMPORTED_MODULE_4__["default"],
     SalesforceRegisterForm: _Pages_Profile_Partials_SalesforceRegisterForm__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  methods: {
+    refreshStatus: function refreshStatus() {
+      this.$inertia.get(route('sf.courier.check'));
+    }
   }
 }));
 
@@ -24451,7 +24459,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     var _this$data, _this$data2, _this$data3, _this$data4;
 
-    console.log(this.data);
     return {
       form: this.$inertia.form({
         inn: (_this$data = this.data) === null || _this$data === void 0 ? void 0 : _this$data.Inn__c,
@@ -29363,21 +29370,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
-  "class": "font-semibold text-xl text-gray-800 leading-tight"
-}, " Courier Forms ", -1
-/* HOISTED */
-);
-
+var _hoisted_1 = {
+  "class": "flex justify-between"
+};
 var _hoisted_2 = {
+  "class": "shrink-0 flex items-center mr-4"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Refresh Request Status ");
+
+var _hoisted_4 = {
   "class": "py-12"
 };
-var _hoisted_3 = {
+var _hoisted_5 = {
   "class": "max-w-7xl mx-auto py-10 sm:px-6 lg:px-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
+
+  var _component_jet_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-button");
 
   var _component_salesforce_register_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("salesforce-register-form");
 
@@ -29391,12 +29402,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     title: "Courier Forms"
   }, {
     header: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$attrs.request_status), 1
+      /* TEXT */
+      ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+        method: "GET",
+        onSubmit: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+          return _ctx.refreshStatus && _ctx.refreshStatus.apply(_ctx, arguments);
+        }, ["prevent"]))
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_button, {
+        "class": "bg-green-500 hover:bg-green-400"
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_3];
+        }),
+        _: 1
+        /* STABLE */
+
+      })], 32
+      /* HYDRATE_EVENTS */
+      )])];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       var _this$$attrs$law_regi, _this$$attrs$law_regi2, _this$$attrs$payment_, _this$$attrs$payment_2;
 
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_salesforce_register_form, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_salesforce_register_form, {
         data: (_this$$attrs$law_regi = _this.$attrs.law_registration) === null || _this$$attrs$law_regi === void 0 ? void 0 : (_this$$attrs$law_regi2 = _this$$attrs$law_regi.data) === null || _this$$attrs$law_regi2 === void 0 ? void 0 : _this$$attrs$law_regi2.body
       }, null, 8
       /* PROPS */

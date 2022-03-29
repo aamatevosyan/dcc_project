@@ -14,8 +14,9 @@ class LawRegistration extends Model
     use HasFactory;
 
     public const STATUS_NEW = 0;
-    public const STATUS_TO_BANK_APPLY = 1;
-    public const STATUS_SUCCESS = 2;
+    public const STATUS_IN_PROGRESS = 1;
+    public const STATUS_TO_BANK_APPLY = 2;
+    public const STATUS_SUCCESS = 3;
 
     protected $fillable = [
         'id',
@@ -38,5 +39,21 @@ class LawRegistration extends Model
     public function lawService(): BelongsTo
     {
         return $this->belongsTo(LawService::class);
+    }
+
+    public function getStatusName(): string
+    {
+        switch ($this->status) {
+            case self::STATUS_NEW:
+                return 'New Request';
+            case self::STATUS_IN_PROGRESS:
+                return "Request In Progress";
+            case self::STATUS_TO_BANK_APPLY:
+                return "To Bank Apply";
+            case self::STATUS_SUCCESS:
+                return "Request Success";
+            default:
+                return "Undefined Request";
+        }
     }
 }
