@@ -13,7 +13,7 @@ Route::controller(SfController::class)
     ->prefix("/courier")
     ->name('courier.')
     ->group(function () {
-        Route::post('/create/{user:uuid}', 'create')
+        Route::post('/create', 'create')
             ->name('create');
 
         Route::patch('/update/{user:uuid}', 'update')

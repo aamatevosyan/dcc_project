@@ -34,7 +34,7 @@ class LawRegistration extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function bankService(): BelongsTo
+    public function lawService(): BelongsTo
     {
         return $this->belongsTo(LawService::class);
     }

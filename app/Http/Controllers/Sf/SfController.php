@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Sf\SendCourierRequest;
 use App\Http\Requests\Sf\UpdateCourierRequest;
 use App\Models\LawRegistration;
+use App\Models\LawService;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
 use Inertia\Response as InertiaResponse;
@@ -21,27 +22,52 @@ class SfController extends Controller
      */
     public function create(SendCourierRequest $request, User $user)
     {
-        try {
-            $response = Forrest::sobjects('Lead', [
-                'method' => 'post',
-                'body' => [
-                    'FirstName' => $user->first_name,
-                    'LastName' => $user->last_name,
-                    'Email' => $user->email,
-                    'Phone' => $user->phone,
-                    'Status' => LawRegistration::STATUS_NEW,
-                    'Company' => 'Delivery Club',
+        $data = [
+            'FirstName' => $user->first_name,
+            'LastName' => $user->last_name,
+            'Email' => $user->email,
+            'Phone' => $user->phone,
+            'Status' => LawRegistration::STATUS_NEW,
+            'Company' => 'Delivery Club',
 //                    'Inn' => $request->inn,
 //                    'PassportCode' => $request->passport_code,
 //                    'PassportNum' => $request->passport_num,
 //                    'Citizenship' => $request->citizenship,
-                ],
-                'headers' => $this->defaultHeaders()
+        ];
+
+        $requestData = [
+            'method' => 'post',
+            'body' => $data,
+            'headers' => $this->defaultHeaders(),
+        ];
+
+        $user = auth()?->user();
+        $lawService = LawService::first();
+
+        $apiLog = $lawService->apiService->apiLogs()->updateOrCreate([
+            'user_id' => $user->id,
+        ], [
+            'request' => $requestData
+        ]);
+
+        try {
+            $response = Forrest::sobjects('Lead', $requestData);
+            dd($response);
+            $apiLog->update([
+                'response' => $response
             ]);
         } catch (SalesforceException $e) {
+            $apiLog->update([
+                'response' => ['error' => $e->getMessage()]
+            ]);
             throw ValidationException::withMessages($this->extractValidationMessages($e));
         }
-        $sf_id = $response['id'];
+
+        $lawService->lawRegistrations()->create([
+            'ind_code' => $response['id'],
+            'data' => $response
+        ]);
+
         dd($response);
         // TODO: link id with user
     }
@@ -52,6 +78,9 @@ class SfController extends Controller
     public function update(UpdateCourierRequest $request, User $user)
     {
         $sf_id = '00Q8d000002nh6jEAA'; // TODO брать из данных по $user->uuid
+        $user = auth()?->user();
+        $lawService = LawService::first();
+
         try {
             $response = Forrest::sobjects("Lead/$sf_id", [
                 'method' => 'patch',

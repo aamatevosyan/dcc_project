@@ -97,11 +97,11 @@ export default defineComponent({
     methods: {
         sendCredentialsData() {
             console.log(this.form);
-            /*this.form.post(route('sf.courier.update'), {
+            this.form.post(route('sf.courier.create'), {
                 errorBag: 'updateProfileInformation',
                 preserveScroll: true,
                 onSuccess: () => null,
-            });*/
+            });
         },
     },
 })

@@ -21,7 +21,7 @@ class SendPhoneCodeRequest extends FormRequest
                 'required',
                 'string',
                 'max:20',
-                Rule::unique('users', 'email')->where('status', User::STATUS_ACTIVE),
+                Rule::unique('users', 'phone')->where('status', User::STATUS_ACTIVE),
             ],
         ];
     }
