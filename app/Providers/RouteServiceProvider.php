@@ -41,6 +41,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->name('auth.register.')
                 ->prefix('/register')
                 ->group(base_path('routes/register.php'));
+
+            Route::middleware(['web'/*, 'auth:sanctum'*/])
+                ->name('sf.')
+                ->prefix('/sf')
+                ->group(base_path('routes/sf.php'));
         });
     }
 

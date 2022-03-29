@@ -32,9 +32,3 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/homepage', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
-
-Route::any('/sf', function (Request $request) {
-    Forrest::authenticate();
-
-    return Forrest::sobjects();
-});

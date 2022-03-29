@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Sf\SfController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Omniphx\Forrest\Providers\Laravel\Facades\Forrest;
 
 /*
 |--------------------------------------------------------------------------

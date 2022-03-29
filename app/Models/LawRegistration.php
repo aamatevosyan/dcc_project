@@ -13,6 +13,8 @@ class LawRegistration extends Model
 {
     use HasFactory;
 
+    public const STATUS_NEW = 'new';
+
     protected $fillable = [
         'id',
         'user_id',
