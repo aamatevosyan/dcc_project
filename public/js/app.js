@@ -24382,15 +24382,17 @@ __webpack_require__.r(__webpack_exports__);
     JetLabel: _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     JetSecondaryButton: _Jetstream_SecondaryButton_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
-  props: ['user'],
+  props: ['data'],
   data: function data() {
+    var _this$data, _this$data2, _this$data3, _this$data4, _this$data5;
+
     return {
       form: this.$inertia.form({
-        correspondent_account: '',
-        bik: '',
-        snils: '',
-        address: '',
-        birth_date: ''
+        correspondent_account: (_this$data = this.data) === null || _this$data === void 0 ? void 0 : _this$data.CorrespondentAccount__c,
+        bik: (_this$data2 = this.data) === null || _this$data2 === void 0 ? void 0 : _this$data2.Bik__c,
+        snils: (_this$data3 = this.data) === null || _this$data3 === void 0 ? void 0 : _this$data3.Snils__c,
+        address: (_this$data4 = this.data) === null || _this$data4 === void 0 ? void 0 : _this$data4.CurrentAddress__c,
+        birth_date: (_this$data5 = this.data) === null || _this$data5 === void 0 ? void 0 : _this$data5.BirthDate__c
       })
     };
   },
@@ -24445,14 +24447,17 @@ __webpack_require__.r(__webpack_exports__);
     JetLabel: _Jetstream_Label_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     JetSecondaryButton: _Jetstream_SecondaryButton_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
-  props: ['user'],
+  props: ['data'],
   data: function data() {
+    var _this$data, _this$data2, _this$data3, _this$data4;
+
+    console.log(this.data);
     return {
       form: this.$inertia.form({
-        inn: '',
-        citizenship: '',
-        passport_code: '',
-        passport_num: ''
+        inn: (_this$data = this.data) === null || _this$data === void 0 ? void 0 : _this$data.Inn__c,
+        citizenship: (_this$data2 = this.data) === null || _this$data2 === void 0 ? void 0 : _this$data2.Citizenship__c,
+        passport_code: (_this$data3 = this.data) === null || _this$data3 === void 0 ? void 0 : _this$data3.PassportCode__c,
+        passport_num: (_this$data4 = this.data) === null || _this$data4 === void 0 ? void 0 : _this$data4.PassportNum__c
       })
     };
   },
@@ -29372,6 +29377,8 @@ var _hoisted_3 = {
   "class": "max-w-7xl mx-auto py-10 sm:px-6 lg:px-8"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   var _component_salesforce_register_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("salesforce-register-form");
 
   var _component_jet_section_border = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("jet-section-border");
@@ -29387,15 +29394,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [_hoisted_1];
     }),
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      var _this$$attrs$law_regi, _this$$attrs$law_regi2, _this$$attrs$payment_, _this$$attrs$payment_2;
+
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_salesforce_register_form, {
-        user: _ctx.$page.props.user
+        data: (_this$$attrs$law_regi = _this.$attrs.law_registration) === null || _this$$attrs$law_regi === void 0 ? void 0 : (_this$$attrs$law_regi2 = _this$$attrs$law_regi.data) === null || _this$$attrs$law_regi2 === void 0 ? void 0 : _this$$attrs$law_regi2.body
       }, null, 8
       /* PROPS */
-      , ["user"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_salesforce_credentials_form, {
-        user: _ctx.$page.props.user
+      , ["data"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_salesforce_credentials_form, {
+        data: (_this$$attrs$payment_ = _this.$attrs.payment_account) === null || _this$$attrs$payment_ === void 0 ? void 0 : (_this$$attrs$payment_2 = _this$$attrs$payment_.data) === null || _this$$attrs$payment_2 === void 0 ? void 0 : _this$$attrs$payment_2.body
       }, null, 8
       /* PROPS */
-      , ["user"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border)])])])];
+      , ["data"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_jet_section_border)])])])];
     }),
     _: 1
     /* STABLE */

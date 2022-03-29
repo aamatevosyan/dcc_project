@@ -9,13 +9,13 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
                 <div>
-                    <salesforce-register-form :user="$page.props.user"/>
+                    <salesforce-register-form :data="this.$attrs.law_registration?.data?.body"/>
 
                     <jet-section-border/>
                 </div>
 
                 <div>
-                    <salesforce-credentials-form :user="$page.props.user"/>
+                    <salesforce-credentials-form :data="this.$attrs.payment_account?.data?.body"/>
 
                     <jet-section-border/>
                 </div>

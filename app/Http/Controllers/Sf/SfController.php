@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Sf;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sf\SendCourierRequest;
 use App\Http\Requests\Sf\UpdateCourierRequest;
+use App\Models\BankService;
 use App\Models\LawRegistration;
 use App\Models\LawService;
 use App\Providers\RouteServiceProvider;
@@ -67,12 +68,12 @@ class SfController extends Controller
         }
 
         // update db law registration info
-        $res = $lawService->lawRegistrations()->updateOrCreate([
+        $lawService->lawRegistrations()->updateOrCreate([
             'user_id' => $user->id,
         ],
             [
                 'ind_code' => $response['id'],
-                'data' => $response,
+                'data' => $requestData,
                 'status' => $data['Status']
             ]
         );
@@ -87,7 +88,7 @@ class SfController extends Controller
     {
         $user = auth()?->user();
         $lawService = LawService::first();
-        $bankService = LawService::first();
+        $bankService = BankService::first();
 
         $data = [
             'Status' => LawRegistration::STATUS_TO_BANK_APPLY,
@@ -128,6 +129,16 @@ class SfController extends Controller
             throw ValidationException::withMessages($this->extractValidationMessages($e));
         }
 
+        // update db payment account status
+        $bankService->paymentAccounts()->updateOrCreate([
+            'user_id' => $user->id,
+        ],
+            [
+                'ind_code' => $sf_id,
+                'data' => $requestData,
+                'status' => $data['Status']
+            ]
+        );
         // update db law registration status
         $lawRegistration->update(['status' => $data['Status']]);
 
@@ -141,7 +152,7 @@ class SfController extends Controller
     {
         $user = auth()?->user();
         $lawService = LawService::first();
-        $lawRegistration = $lawService->lawRegistrations()->findOrFail($user->uuid);
+        $lawRegistration = $lawService->lawRegistrations()->where('user_id', $user->id)->firstOrFail();;
 
         $sf_id = $lawRegistration->ind_code;
         try {

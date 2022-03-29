@@ -82,16 +82,16 @@ export default defineComponent({
         JetSecondaryButton,
     },
 
-    props: ['user'],
+    props: ['data'],
 
     data() {
         return {
             form: this.$inertia.form({
-                correspondent_account: '',
-                bik: '',
-                snils: '',
-                address: '',
-                birth_date: '',
+                correspondent_account: this.data?.CorrespondentAccount__c,
+                bik: this.data?.Bik__c,
+                snils: this.data?.Snils__c,
+                address: this.data?.CurrentAddress__c,
+                birth_date: this.data?.BirthDate__c,
             }),
         }
     },

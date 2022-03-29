@@ -41,6 +41,7 @@
                 <jet-input-error :message="form.errors.passport_code" class="mt-2"/>
             </div>
 
+
             <!-- Passport Number -->
             <div class="col-span-6 sm:col-span-4">
                 <jet-label for="passportNum" value="Passport number"/>
@@ -84,15 +85,16 @@ export default defineComponent({
         JetSecondaryButton,
     },
 
-    props: ['user'],
+    props: ['data'],
 
     data() {
+        console.log(this.data);
         return {
             form: this.$inertia.form({
-                inn: '',
-                citizenship: '',
-                passport_code: '',
-                passport_num: '',
+                inn: this.data?.Inn__c,
+                citizenship: this.data?.Citizenship__c,
+                passport_code: this.data?.PassportCode__c,
+                passport_num: this.data?.PassportNum__c,
             }),
         }
     },

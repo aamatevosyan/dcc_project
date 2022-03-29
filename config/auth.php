@@ -114,7 +114,7 @@ return [
 
     'sms_code_timeout' => 300,
 
-    'sms_send_enable' => false,
+    'sms_send_enable' => true,
 
     'sms_cool_down_after_seconds' => 300,
 
