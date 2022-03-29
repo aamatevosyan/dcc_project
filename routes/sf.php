@@ -15,4 +15,7 @@ Route::controller(SfController::class)
     ->group(function () {
         Route::post('/create/{user:uuid}', 'create')
             ->name('create');
+
+        Route::patch('/update/{user:uuid}', 'update')
+            ->name('update');
     });

@@ -14,6 +14,7 @@ class LawRegistration extends Model
     use HasFactory;
 
     public const STATUS_NEW = 'new';
+    public const STATUS_TO_BANK_APPLY = 'to_bank_apply';
 
     protected $fillable = [
         'id',
