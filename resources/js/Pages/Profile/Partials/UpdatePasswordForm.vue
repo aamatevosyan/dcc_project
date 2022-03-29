@@ -33,7 +33,7 @@
                 Saved.
             </jet-action-message>
 
-            <jet-button :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+            <jet-button :class="{ 'opacity-25': form.processing }" class="bg-green-500 hover:bg-green-400" :disabled="form.processing">
                 Save
             </jet-button>
         </template>
@@ -41,15 +41,15 @@
 </template>
 
 <script>
-    import { defineComponent } from 'vue'
-    import JetActionMessage from '@/Jetstream/ActionMessage.vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import JetFormSection from '@/Jetstream/FormSection.vue'
-    import JetInput from '@/Jetstream/Input.vue'
-    import JetInputError from '@/Jetstream/InputError.vue'
-    import JetLabel from '@/Jetstream/Label.vue'
+import {defineComponent} from 'vue'
+import JetActionMessage from '@/Jetstream/ActionMessage.vue'
+import JetButton from '@/Jetstream/Button.vue'
+import JetFormSection from '@/Jetstream/FormSection.vue'
+import JetInput from '@/Jetstream/Input.vue'
+import JetInputError from '@/Jetstream/InputError.vue'
+import JetLabel from '@/Jetstream/Label.vue'
 
-    export default defineComponent({
+export default defineComponent({
         components: {
             JetActionMessage,
             JetButton,

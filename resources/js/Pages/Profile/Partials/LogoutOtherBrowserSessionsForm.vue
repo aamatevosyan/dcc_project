@@ -44,7 +44,7 @@
             </div>
 
             <div class="flex items-center mt-5">
-                <jet-button @click="confirmLogout">
+                <jet-button @click="confirmLogout" class="bg-green-500 hover:bg-green-400" >
                     Log Out Other Browser Sessions
                 </jet-button>
 
@@ -77,7 +77,7 @@
                         Cancel
                     </jet-secondary-button>
 
-                    <jet-button class="ml-3" @click="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    <jet-button @click="logoutOtherBrowserSessions" :class="{ 'opacity-25': form.processing }" class="ml-3 bg-green-500 hover:bg-green-400" :disabled="form.processing" >
                         Log Out Other Browser Sessions
                     </jet-button>
                 </template>
@@ -87,16 +87,16 @@
 </template>
 
 <script>
-    import { defineComponent } from 'vue'
-    import JetActionMessage from '@/Jetstream/ActionMessage.vue'
-    import JetActionSection from '@/Jetstream/ActionSection.vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import JetDialogModal from '@/Jetstream/DialogModal.vue'
-    import JetInput from '@/Jetstream/Input.vue'
-    import JetInputError from '@/Jetstream/InputError.vue'
-    import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
+import {defineComponent} from 'vue'
+import JetActionMessage from '@/Jetstream/ActionMessage.vue'
+import JetActionSection from '@/Jetstream/ActionSection.vue'
+import JetButton from '@/Jetstream/Button.vue'
+import JetDialogModal from '@/Jetstream/DialogModal.vue'
+import JetInput from '@/Jetstream/Input.vue'
+import JetInputError from '@/Jetstream/InputError.vue'
+import JetSecondaryButton from '@/Jetstream/SecondaryButton.vue'
 
-    export default defineComponent({
+export default defineComponent({
         props: ['sessions'],
 
         components: {
