@@ -68,10 +68,10 @@ class SfController extends Controller
 //                    'PassportCode' => $request->passport_code,
 //                    'PassportNum' => $request->passport_num,
 //                    'Citizenship' => $request->citizenship,
-                    'CorrespondentAccount' => $request->correspondent_account,
-                    'Bik' => $request->bik,
+//                    'CorrespondentAccount' => $request->correspondent_account,
+//                    'Bik' => $request->bik,
 //                    'Snils' => $request->snils,
-                    'Address' => $request->address,
+//                    'Address' => $request->address,
 //                    'BirthDate' => $request->birth_date,
                 ],
                 'headers' => $this->defaultHeaders()
@@ -93,6 +93,8 @@ class SfController extends Controller
 
     private function extractValidationMessages(\Exception|SalesforceException $e): array
     {
-        return json_decode($e->getMessage());
+        return collect(json_decode($e->getMessage()))
+            ->map((fn($elem) => $elem->message))
+            ->toArray();
     }
 }
